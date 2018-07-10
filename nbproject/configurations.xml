@@ -8,15 +8,19 @@
           <itemPath>drivers/I2C/EEPROM/24XX1025.h</itemPath>
           <itemPath>drivers/I2C/EEPROM/24XX16.c</itemPath>
           <itemPath>drivers/I2C/EEPROM/24XX16.h</itemPath>
+          <itemPath>drivers/I2C/EEPROM/eeprom_common.c</itemPath>
+          <itemPath>drivers/I2C/EEPROM/eeprom_common.h</itemPath>
+          <itemPath>drivers/I2C/i2c_driver.c</itemPath>
         </logicalFolder>
         <logicalFolder name="MCP4018" displayName="MCP4018" projectFiles="true">
           <itemPath>drivers/I2C/MCP4018/rheostat.h</itemPath>
           <itemPath>drivers/I2C/MCP4018/rheostat.c</itemPath>
         </logicalFolder>
-        <itemPath>drivers/I2C/i2c_drv.c</itemPath>
-        <itemPath>drivers/I2C/i2c_drv.h</itemPath>
-        <itemPath>drivers/I2C/MyI2C2.c</itemPath>
-        <itemPath>drivers/I2C/MyI2C2.h</itemPath>
+        <itemPath>drivers/I2C/i2c_bitbang.c</itemPath>
+        <itemPath>drivers/I2C/i2c_bitbang.h</itemPath>
+        <itemPath>drivers/I2C/i2c_module2.c</itemPath>
+        <itemPath>drivers/I2C/i2c_module2.h</itemPath>
+        <itemPath>drivers/I2C/i2c_driver.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="HeaderFiles"
@@ -692,7 +696,7 @@
         <C30Global>
         </C30Global>
       </item>
-      <item path="drivers/I2C/MyI2C2.c" ex="true" overriding="false">
+      <item path="drivers/I2C/i2c_module2.c" ex="true" overriding="false">
         <C30>
         </C30>
         <C30-AR>
@@ -704,7 +708,7 @@
         <C30Global>
         </C30Global>
       </item>
-      <item path="drivers/I2C/MyI2C2.h" ex="false" overriding="false">
+      <item path="drivers/I2C/i2c_module2.h" ex="false" overriding="false">
         <C30>
         </C30>
         <C30-AR>

@@ -33,57 +33,22 @@
 #define LED_RUN                 LATBbits.LATB8
 
 
-
-
-#define DISP_DATA_0             LATCbits.LATC0
-#define DISP_DATA_0_TRIS        TRISCbits.TRISC0
-#define DISP_DATA_1             LATCbits.LATC1
-#define DISP_DATA_1_TRIS        TRISCbits.TRISC1
-#define DISP_DATA_2             LATCbits.LATC2
-#define DISP_DATA_2_TRIS        TRISCbits.TRISC2
-#define DISP_DATA_3             LATCbits.LATC3
-#define DISP_DATA_3_TRIS        TRISCbits.TRISC3
-#define DISP_DATA_4             LATCbits.LATC4
-#define DISP_DATA_4_TRIS        TRISCbits.TRISC4
-#define DISP_DATA_5             LATCbits.LATC5
-#define DISP_DATA_5_TRIS        TRISCbits.TRISC5
-#define DISP_DATA_6             LATCbits.LATC6
-#define DISP_DATA_6_TRIS        TRISCbits.TRISC6
-#define DISP_DATA_7             LATCbits.LATC7
-#define DISP_DATA_7_TRIS        TRISCbits.TRISC7
-
-
-
-#define DISP_CS                 LATBbits.LATB0
-#define DISP_CS_TRIS            TRISBbits.TRISB0
-
-#define DISP_EN                 LATBbits.LATB3
-#define DISP_EN_TRIS            TRISBbits.TRISB3
-
-#define DISP_RESET              LATBbits.LATB1
-#define DISP_RESET_TRIS         TRISBbits.TRISB1
-
-#define DISP_READ_WRITE         LATBbits.LATB3
+// TODO: READ_WRITE dovrebbe essere RB2
 #define DISP_READ_WRITE_TRIS    TRISBbits.TRISB3
 
-#define DISP_RS                 LATBbits.LATB4
-#define DISP_RS_TRIS            TRISBbits.TRISB4
-
-#define LCD_RETRO               LATGbits.LATG14
-#define LCD_RETRO_TRIS          TRISGbits.TRISG14
 
 
 
 //  KEYBOARD ================================================================ //
 //
-#define KEY_1                   !PORTAbits.RA3
-#define KEY_1_TRIS              TRISAbits.TRISA3
-#define KEY_2                   !PORTAbits.RA8
-#define KEY_2_TRIS              TRISAbits.TRISA8
-#define KEY_3                   !PORTAbits.RA4
-#define KEY_3_TRIS              TRISAbits.TRISA4
-#define KEY_4                   !PORTAbits.RA9
-#define KEY_4_TRIS              TRISAbits.TRISA9
+#define KEY_1                   !PORTBbits.RB1
+#define KEY_1_TRIS              TRISBbits.TRISB1
+#define KEY_2                   !PORTBbits.RB4
+#define KEY_2_TRIS              TRISBbits.TRISB4
+#define KEY_3                   !PORTCbits.RC6
+#define KEY_3_TRIS              TRISCbits.TRISC6
+#define KEY_4                   !PORTCbits.RC7
+#define KEY_4_TRIS              TRISCbits.TRISC7
 
 
 
@@ -104,14 +69,32 @@
 //
 #define OUT_01                  LATCbits.LATC8
 #define OUT_01_TRIS             TRISCbits.TRISC8
-#define OUT_02                  LATBbits.LATB6
-#define OUT_02_TRIS             TRISBbits.TRISB6
-#define OUT_03                  LATBbits.LATB5
-#define OUT_03_TRIS             TRISBbits.TRISB5
-//#define OUT_02                  LATBbits.LATB10
-//#define OUT_02_TRIS             TRISBbits.TRISB10
-//#define OUT_03                  LATBbits.LATB11
-//#define OUT_03_TRIS             TRISBbits.TRISB11
+#define OUT_02                  LATBbits.LATB9
+#define OUT_02_TRIS             TRISBbits.TRISB9
+#define OUT_03                  LATCbits.LATC9
+#define OUT_03_TRIS             TRISCbits.TRISC9
+
+
+// LEDs
+#define OUT_04                  LATBbits.LATB0
+#define OUT_04_TRIS             TRISBbits.TRISB0
+#define OUT_05                  LATBbits.LATB2
+#define OUT_05_TRIS             TRISBbits.TRISB2
+#define OUT_06                  LATBbits.LATB3
+#define OUT_06_TRIS             TRISBbits.TRISB3
+#define OUT_07                  LATCbits.LATC0
+#define OUT_07_TRIS             TRISCbits.TRISC0
+#define OUT_08                  LATCbits.LATC1
+#define OUT_08_TRIS             TRISCbits.TRISC1
+#define OUT_09                  LATCbits.LATC2
+#define OUT_09_TRIS             TRISCbits.TRISC2
+#define OUT_10                  LATCbits.LATC3
+#define OUT_10_TRIS             TRISCbits.TRISC3
+#define OUT_11                  LATCbits.LATC4
+#define OUT_11_TRIS             TRISCbits.TRISC4
+#define OUT_12                  LATCbits.LATC5
+#define OUT_12_TRIS             TRISCbits.TRISC5
+
 
 #define TRIAC                   OUT_01
 #define RELE1                   OUT_02
@@ -156,13 +139,11 @@
 #define UNUSED1_TRIS            TRISAbits.TRISA7
 #define UNUSED2_TRIS            TRISAbits.TRISA10
 
-#define UNUSED3_TRIS            TRISBbits.TRISB9
 #define UNUSED4_TRIS            TRISBbits.TRISB12
 #define UNUSED5_TRIS            TRISBbits.TRISB13
 #define UNUSED6_TRIS            TRISBbits.TRISB14
 #define UNUSED7_TRIS            TRISBbits.TRISB15
 
-#define UNUSED8_TRIS            TRISCbits.TRISC9
 
 
 
@@ -170,12 +151,10 @@
 #define UNUSED1                 LATAbits.LATA7
 #define UNUSED2                 LATAbits.LATA10
 
-#define UNUSED3                 LATBbits.LATB9
 #define UNUSED4                 LATBbits.LATB12
 #define UNUSED5                 LATBbits.LATB13
 #define UNUSED6                 LATBbits.LATB14
 #define UNUSED7                 LATBbits.LATB15
 
-#define UNUSED8                 LATCbits.LATC9
 
 #endif	/* HARDWAREPROFILE_H */

@@ -1,6 +1,6 @@
 
 #include "test_suite.h"
-#include "MyI2C2.h"
+#include "i2c_module2.h"
 
 //__eds__ uint8_t test_array_eds[ARRAY_SIZE] __attribute__((eds));
 uint8_t test_array_eds[ARRAY_SIZE];

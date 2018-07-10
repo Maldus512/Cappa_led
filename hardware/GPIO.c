@@ -25,28 +25,10 @@ void Init_GPIO(void)
 {    
     // DISABILITO AD NEI BIT CHE USO COME INPUT (tutti)
     AD1CON1bits.ADON = 0;
-    ANSAbits.ANSA0 = 0;
-    ANSAbits.ANSA1 = 0;
-    ANSAbits.ANSA2 = 0;
-    ANSAbits.ANSA3 = 0;
 
-//    ANSELA = 0;
+    ANSA = 0;
+    ANSB = 0;
 
-    // Init Directions & Preset pin DATA & CONTROL LCD ====================== //
-    DISP_DATA_TRIS = DISP_DATA_TRIS & ~DISP_DATA_MASK;
-    DISP_EN_TRIS                    = OUT;
-    DISP_RESET_TRIS                 = OUT;
-    DISP_READ_WRITE_TRIS            = OUT;
-    DISP_RS_TRIS                    = OUT;
-    DISP_CS_TRIS                    = OUT;
-    
-    // ---------------------------------
-    DISP_DATA_OUT = DISP_DATA_OUT & ~DISP_DATA_MASK;
-    DISP_EN                         = 1;
-    DISP_RESET                      = 1;
-    DISP_READ_WRITE                 = 1;
-    DISP_CS                         = 1;
-    DISP_RS                         = 1;
     
     /* Keyboard */
     KEY_1_TRIS                      = IN;
@@ -60,10 +42,28 @@ void Init_GPIO(void)
     OUT_01_TRIS                     = OUT;
     OUT_02_TRIS                     = OUT;
     OUT_03_TRIS                     = OUT;
+    OUT_04_TRIS                     = OUT;
+    OUT_05_TRIS                     = OUT;
+    OUT_06_TRIS                     = OUT;
+    OUT_07_TRIS                     = OUT;
+    OUT_08_TRIS                     = OUT;
+    OUT_09_TRIS                     = OUT;
+    OUT_10_TRIS                     = OUT;
+    OUT_11_TRIS                     = OUT;
+    OUT_12_TRIS                     = OUT;
 
     OUT_01                          = 0;
     OUT_02                          = 0;
     OUT_03                          = 0;
+    OUT_04                          = 0;
+    OUT_05                          = 0;
+    OUT_06                          = 0;
+    OUT_07                          = 0;
+    OUT_08                          = 0;
+    OUT_09                          = 0;
+    OUT_10                          = 0;
+    OUT_11                          = 0;
+    OUT_12                          = 0;
     
     LED_RUN_TRIS = OUT;
     
@@ -74,13 +74,11 @@ void Init_GPIO(void)
     UNUSED1_TRIS = OUT;
     UNUSED2_TRIS = OUT;
 
-    UNUSED3_TRIS = OUT;
     UNUSED4_TRIS = OUT;
     UNUSED5_TRIS = OUT;
     UNUSED6_TRIS = OUT;
     UNUSED7_TRIS = OUT;
     
-    UNUSED8_TRIS = OUT;
    
     
     
@@ -88,11 +86,9 @@ void Init_GPIO(void)
     UNUSED1 = 0;
     UNUSED2 = 0;
     
-    UNUSED3 = 0;
     UNUSED4 = 0;
     UNUSED5 = 0;
     UNUSED6 = 0;
     UNUSED7 = 0;
     
-    UNUSED8 = 0;
 }

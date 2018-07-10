@@ -80,7 +80,7 @@ void __attribute__((interrupt, no_auto_psv)) _IOCInterrupt()
     
     if (f_pwm_on) // < 5usec
     {
-        if (velocita_pwm > 90)
+        if (velocita_pwm >= 90)
         {
             TRIAC = 1;
         }

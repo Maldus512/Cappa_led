@@ -16,7 +16,7 @@
 /******************************************************************************/
 
 #include "variabili_parametri_macchina.h"
-#include "MyI2C2.h"
+#include "i2c_module2.h"
 
 int old_livello_accesso = 0;
 

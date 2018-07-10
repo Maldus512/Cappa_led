@@ -29,17 +29,27 @@
 
 
 typedef enum {
-    OUT_TRIAC = 1,
+    OUT_TRIAC = 0,
             OUT_RELE1,
-            OUT_RELE2
+            OUT_RELE2,
+            OUT_LED1P1,
+            OUT_LED2P1,
+            OUT_LED1P2,
+            OUT_LED2P2,
+            OUT_LED1,
+            OUT_LED2,
+            OUT_LED3,
+            OUT_LED4,
+            OUT_LED5,
+            
+            NUM_OUTPUT
+
 } OUTPUT;
 
 
 void init_Digout(void);
 
-void Read_stato_out(void);
 
-void agg_out_mom(void);
 
 void set_digout(OUTPUT dig);
 

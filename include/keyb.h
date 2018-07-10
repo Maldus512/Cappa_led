@@ -38,6 +38,7 @@
 #define P_PIU_MENO      0x05
 
 
+extern unsigned char            OneShot;
 
 /*----------------------------------------------------------------------------*/
 /*  prototipi funzioni                                                        */

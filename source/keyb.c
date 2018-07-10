@@ -118,6 +118,7 @@ unsigned char KeyBoard(void)
             /*------------------------------------------------------------*/
             if (cKey == cOldKey)
             {
+                OneShot = 0;
                 Key_repeat_cnt++;
                 Key_stop_cnt = Key_repeat_cnt / 5; // => decimi sec (20msec * 5 = 100msec = 0,1sec) !!!! ToDO
 //////                Key_stop_cnt++;     // => decimi sec (20msec * 5 = 100msec = 0,1sec) !!!! ToDO
@@ -189,6 +190,7 @@ unsigned char KeyBoard(void)
             Key_repeat_cnt = 0;
             Key_stop_cnt = 0;
             f_no_tasto = 0;
+            OneShot = 0;
         }
         
         /* Memorizza sempre ultimo tasto premuto */
@@ -207,7 +209,7 @@ unsigned char KeyBoard(void)
         Key_repeat_cnt = 0;
         Key_stop_cnt = 0;
         f_no_tasto = 0;
-        
+        OneShot = 0;
 //        pag_corrente->k_processor(0); // Noooooooo .... era "*display_processor) (0);"
         cOldKey = 0xFF;
     }
