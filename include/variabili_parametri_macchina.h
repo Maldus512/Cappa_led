@@ -26,9 +26,7 @@ extern int old_livello_accesso;
 
 #define MAX_VELOCITA_4R     4  // 8+8+8+8
 
-#define MAX_RAMPA_CUSTOM    8
-
-extern const int step_rampe[];
+#define MAX_RAMPA    5
 
 extern int *rampe_velocita_50hz[MAX_VELOCITA_4R];
 
@@ -58,8 +56,6 @@ struct PARAMETRI_MACCHINA
     unsigned int     timer_start;
     unsigned int     timer_stop;
     char    tipo_motore;
-    int rampa_custom[MAX_RAMPA_CUSTOM];
-    int step_rampa_custom;
 };
 
 extern struct PARAMETRI_MACCHINA parmac;

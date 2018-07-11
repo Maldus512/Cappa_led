@@ -41,6 +41,7 @@
         <itemPath>include/variabili_parametri_sistema.h</itemPath>
         <itemPath>include/keyb.h</itemPath>
         <itemPath>include/peripherals.h</itemPath>
+        <itemPath>include/dispfunz.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
@@ -55,6 +56,10 @@
         <itemPath>hardware/system.c</itemPath>
       </logicalFolder>
       <logicalFolder name="source" displayName="source" projectFiles="true">
+        <logicalFolder name="paginate" displayName="paginate" projectFiles="true">
+          <itemPath>source/paginate/dispfunz.c</itemPath>
+          <itemPath>source/paginate/pag_principale.c</itemPath>
+        </logicalFolder>
         <itemPath>source/main.c</itemPath>
         <itemPath>source/traps.c</itemPath>
         <itemPath>source/timer.c</itemPath>

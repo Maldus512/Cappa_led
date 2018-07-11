@@ -81,6 +81,7 @@ const unsigned char str_versione_prog[] = "[V:00.3 D:11/05/2018]\0"; // 21 CHR
 #include "i2c_bitbang.h"
 #include "digout.h"
 #include "EEPROM/24XX16.h"
+#include "dispfunz.h"
 
 
 
@@ -97,7 +98,7 @@ int main(void)
     Init_GPIO();
     Init_I2C_bitbang();
         
-    loadParMac(&parmac);
+    //loadParMac(&parmac);
 
     
     Init_Timers();
@@ -138,42 +139,44 @@ int main(void)
         Nop();
     }
     
+    Cambio_Pag(PAG_PRINCIPALE);
+    
     // MAIN LOOP ============================================================ //
     // MAIN LOOP ============================================================ //
     // MAIN LOOP ============================================================ //
     set_digout(led);
     while(1)
     {
-        tasto = KeyBoard();
-        
-        if (tasto != 0 && tasto != 0xFF && OneShot == 1) {
-            
-//            OneShot = 0;
+//        tasto = KeyBoard();
+//        
+//        if (tasto != 0 && tasto != 0xFF && OneShot == 1) {
 //            
-//            if (f_pwm_on) {
-//                f_pwm_on = 0;
+////            OneShot = 0;
+////            
+////            if (f_pwm_on) {
+////                f_pwm_on = 0;
+////            }
+////            else {
+////                x += 10;
+////                if (x > 100) {
+////                    x = 20;
+////                }
+////
+////                setVelocita(x);
+////                f_pwm_on = 1;
+////            }
+//            
+//            clear_digout_all();
+//            led++;
+//            if (led == NUM_OUTPUT) {
+//                led = OUT_RELE1;
 //            }
-//            else {
-//                x += 10;
-//                if (x > 100) {
-//                    x = 20;
-//                }
-//
-//                setVelocita(x);
-//                f_pwm_on = 1;
-//            }
-            
-            clear_digout_all();
-            led++;
-            if (led == NUM_OUTPUT) {
-                led = OUT_RELE1;
-            }
-            set_digout(led);
-        }
-        
-        Nop();
-        Nop();
-        Nop();
+//            set_digout(led);
+//        }
+//        
+//        Nop();
+//        Nop();
+//        Nop();
     }
     return 0;
 }

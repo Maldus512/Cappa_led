@@ -3,36 +3,55 @@
 /*  HSW snc - Casalecchio di Reno (BO) ITALY                                  */
 /*  ----------------------------------------                                  */
 /*                                                                            */
-/*  modulo: timers.h                                                          */
+/*  modulo: dispfunz.h                                                        */
 /*                                                                            */
-/*      gestione TIMERS                                                       */
+/*      gestione tasti / displeata                                            */
 /*                                                                            */
-/*  Autore: Maldus (Mattia MALDINI) & Massimo ZANNA                           */
+/*  Autore: Maldus(Mattia MALDINI) & Massimo ZANNA                            */
 /*                                                                            */
-/*  Data  : 25/03/2018      REV  : 00.0                                       */
+/*  Data  : 07/10/2017      REV  : 00.0                                       */
 /*                                                                            */
-/*  U.mod.: 03/05/2018      REV  : 01.0                                       */
+/*  U.mod.: 24/04/2018      REV  : 01.4                                       */
 /*                                                                            */
 /******************************************************************************/
 
-#ifndef __TIMER_H__
-#define	__TIMER_H__
-
-void Init_Timers (void);
-
-unsigned long long getTimestamp();
-
-void initTimer1 (void);
-void initTimer2 (void);
-void initTimer3 (void);
-
-extern char     f_100ms;
-extern char     f_500ms;
-extern char     f_1s;
+#ifndef DISPFUNZ_H
+#define	DISPFUNZ_H
+#include <string.h>
+#include <stdio.h>
 
 
-extern char     f_blink;
-extern int      pwm_off_time;
-extern char f_update_display;
 
-#endif
+typedef enum 
+{
+    DEF, TEST, PROG_RIS, PROG_MAC, PROG_LAV, PROG_SET
+} TIPOPAG;
+
+
+typedef struct _paginata
+{
+    void (*d_processor)(void);
+    void (*k_processor)(char);
+    TIPOPAG tipo;
+} PAGINATA;
+
+
+
+extern PAGINATA *pag_corrente;
+
+extern PAGINATA *PAG_PRINCIPALE;
+
+
+
+extern char    f_clear_pag;
+extern char    f_new_pag;
+
+
+
+
+void Cambio_Pag (PAGINATA *pag);
+void Indietro();
+
+
+
+#endif	/* DISPFUNZ_H */

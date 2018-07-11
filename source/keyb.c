@@ -128,45 +128,38 @@ unsigned char KeyBoard(void)
                     if (Key_repeat_cnt < T1_PULSANTI)
                     {
                         t_ms_tasto_repeat = 800;
-//                        pag_corrente->k_processor(cKey);
                     }
                     else
                     {
                         if (Key_repeat_cnt < T2_PULSANTI)
                         {
                             t_ms_tasto_repeat = 600;
-//                            pag_corrente->k_processor(cKey);
                         }
                         else
                         {
                             if (Key_repeat_cnt < T3_PULSANTI)
                             {
                                 t_ms_tasto_repeat = 400;
-//                                pag_corrente->k_processor(cKey);
                             }
                             else
                             {
                                 if (Key_repeat_cnt < T4_PULSANTI)
                                 {
                                     t_ms_tasto_repeat = 200;
-//                                    pag_corrente->k_processor(cKey);
                                 }
                                 else
                                 {
                                     if (Key_repeat_cnt < T5_PULSANTI)
                                     {
                                         t_ms_tasto_repeat = 100;
-//                                        pag_corrente->k_processor(cKey);
                                     }
                                         if (Key_repeat_cnt < T6_PULSANTI)
                                         {
                                             t_ms_tasto_repeat = 80;
-//                                            pag_corrente->k_processor(cKey);
                                         }
                                         else
                                         {
                                         t_ms_tasto_repeat = 20;
-//                                        pag_corrente->k_processor(cKey);
                                     }
                                 }
                             }
@@ -181,7 +174,6 @@ unsigned char KeyBoard(void)
                 Key_stop_cnt = 0;
                 
                 OneShot = 1;
-//                pag_corrente->k_processor(cKey);
             }
         }
         else // combinazione tasti non valida => azzero i repeat
@@ -210,7 +202,6 @@ unsigned char KeyBoard(void)
         Key_stop_cnt = 0;
         f_no_tasto = 0;
         OneShot = 0;
-//        pag_corrente->k_processor(0); // Noooooooo .... era "*display_processor) (0);"
         cOldKey = 0xFF;
     }
     return (cKey);

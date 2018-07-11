@@ -20,12 +20,10 @@
 
 int old_livello_accesso = 0;
 
-const int step_rampe[] = {5, 6, 7, 8};
-
 int rampa1[] = {30, 45, 60, 80, 99};
-int rampa2[] = {30, 40, 45, 60, 80, 99};
-int rampa3[] = {30, 40, 45, 50, 60, 80, 99};
-int rampa4[] = {30, 40, 45, 50, 60, 70, 80, 99};
+int rampa2[] = {30, 40, 60, 80, 99};
+int rampa3[] = {30, 40, 50, 60, 80};
+int rampa4[] = {30, 40, 50, 70, 99};
 
 
 int *rampe_velocita_50hz[MAX_VELOCITA_4R] = {
@@ -52,10 +50,8 @@ struct PARAMETRI_MACCHINA parmac =
     .vel_ventola = 0,
     .potenziometro = 0,
     .timer_start = 15,
-    .timer_stop = 0,
+    .timer_stop = 15,
     .tipo_motore = MOTORE_CUSTOM,
-    .rampa_custom = {30, 40, 45, 50, 60, 70, 80, 99},
-    .step_rampa_custom = MAX_RAMPA_CUSTOM,
 };
 
 

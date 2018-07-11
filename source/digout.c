@@ -136,8 +136,45 @@ char get_digout (OUTPUT dig)
         case OUT_RELE2:
             return(OUT_03);
             
+            
+        case OUT_LED1P1:
+            return(OUT_04);
+            break;
+            
+        case OUT_LED2P1:
+            return OUT_05;
+            break;
+            
+        case OUT_LED1P2:
+            return OUT_06;
+            break;
+            
+        case OUT_LED2P2:
+            return OUT_07;
+            break;
+            
+        case OUT_LED1:
+            return OUT_08;
+            break;
+            
+        case OUT_LED2:
+            return OUT_09;
+            break;
+            
+        case OUT_LED3:
+            return OUT_10;
+            break;
+            
+        case OUT_LED4:
+            return OUT_11;
+            break;
+            
+        case OUT_LED5:
+            return OUT_12;
+            break;
+            
         default:
-            return(0xFF);
+            return(-1);
     }
 }
 
