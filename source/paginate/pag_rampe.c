@@ -28,39 +28,41 @@
 
 static void display_processor()
 {
-    int i;
+    int    i;
     OUTPUT led;
-    if (f_new_pag==1)
+    if (f_new_pag == 1)
     {
         f_pwm_on = 0;
         clear_digout_all();
-        
+
         f_new_pag = 0;
     }
-    
+
     if (f_clear_pag || f_500ms)
     {
-        if (f_500ms) 
+        if (f_500ms)
         {
             toggle_digout(OUT_LED5);
         }
-        
+
         led = OUT_LED1;
-        for (i = 0; i < 4; i++) {
-            if (i <= parmac.rampa) {
+        for (i = 0; i < 4; i++)
+        {
+            if (i <= parmac.rampa)
+            {
                 set_digout(led);
             }
-            else {
+            else
+            {
                 clear_digout(led);
             }
             led++;
         }
 
-        
-        f_500ms = 0;
+
+        f_500ms     = 0;
         f_clear_pag = 0;
     }
-
 }
 
 
@@ -69,7 +71,7 @@ static void keyboard_processor(char cKey)
 {
     int *rampa;
     rampa = rampe_velocita_50hz[parmac.rampa];
-    
+
     // gestione tasti senza repeat ========================================== //
     if (cKey != 0 && cKey != 0xFF && OneShot)
     {
@@ -86,7 +88,7 @@ static void keyboard_processor(char cKey)
 
             case P_PIU: /* -------------------------------------------- */
 
-                if (parmac.rampa < NUM_RAMPE-1)
+                if (parmac.rampa < NUM_RAMPE - 1)
                     parmac.rampa++;
 
                 saveParMac(parmac);
@@ -107,11 +109,8 @@ static void keyboard_processor(char cKey)
     }
 }
 
-PAGINATA pag_rampe_struct =
-{
-    .d_processor = display_processor,
-    .k_processor = keyboard_processor,
-    .tipo = DEF,
+PAGINATA pag_rampe_struct = {
+    .d_processor = display_processor, .k_processor = keyboard_processor, .tipo = DEF,
 };
 
 PAGINATA *PAG_RAMPE = &pag_rampe_struct;

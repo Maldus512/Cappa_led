@@ -21,12 +21,12 @@
 
 
 
-char                f_new_pag = 0;
-char           f_clear_pag = 0;
+char f_new_pag   = 0;
+char f_clear_pag = 0;
 
 
 PAGINATA *pag_corrente = NULL;
-PAGINATA *old_pag = NULL;
+PAGINATA *old_pag      = NULL;
 
 
 
@@ -34,16 +34,16 @@ PAGINATA *old_pag = NULL;
 /*----------------------------------------------------------------------------*/
 /*  Cambio Pagina Visualizzata                                                */
 /*----------------------------------------------------------------------------*/
-void Cambio_Pag (PAGINATA *pag)
+void Cambio_Pag(PAGINATA *pag)
 {
     unsigned char typ;
-    
-    old_pag = pag_corrente;
+
+    old_pag      = pag_corrente;
     pag_corrente = pag;
-    
+
     typ = pag_corrente->tipo;
-    
-    if (typ==TEST)
+
+    if (typ == TEST)
     {
         f_in_test = 1;
     }
@@ -51,18 +51,14 @@ void Cambio_Pag (PAGINATA *pag)
     {
         f_in_test = 0;
     }
-    
-    if (typ==PROG_LAV || typ==PROG_MAC || typ==PROG_SET)
+
+    if (typ == PROG_LAV || typ == PROG_MAC || typ == PROG_SET)
         f_in_prog = 1;
     else
         f_in_prog = 0;
-    
+
     f_clear_pag = 1;
-    f_new_pag = 1;
+    f_new_pag   = 1;
 }
 
-void Indietro()
-{
-    Cambio_Pag(old_pag);
-}
-
+void Indietro() { Cambio_Pag(old_pag); }

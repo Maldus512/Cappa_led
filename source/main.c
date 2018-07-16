@@ -34,7 +34,7 @@
 /*============================================================================*/
 
 // STRINGA "VERSIONE PROGRAMMA"            012345678901234567890
-const unsigned char str_versione_prog[] = "[V:00.3 D:11/05/2018]\0"; // 21 CHR
+const unsigned char str_versione_prog[] = "[V:00.3 D:11/05/2018]\0";     // 21 CHR
 
 
 
@@ -91,51 +91,52 @@ const unsigned char str_versione_prog[] = "[V:00.3 D:11/05/2018]\0"; // 21 CHR
 int main(void)
 {
     unsigned char tasto = 0;
-    OUTPUT led = OUT_LED1P1;
+    OUTPUT        led   = OUT_LED1P1;
     Configure_Oscillator();
     delay_ms(250);
-    
+
     Init_GPIO();
     Init_I2C();
-    
-    //saveParMac(parmac);
+
+    // saveParMac(parmac);
     loadParMac(&parmac);
 
-    
+
     Init_Timers();
     Init_Digin_Filter(&DI_P1, 0, 0, DEBOUNCE);
     Init_ZeroCrossing();
-    
-    
-    
+
+
+
     setRheostatValue(parmac.potenziometro);
 
-        delay_ms(500);
+    delay_ms(500);
     // INIZIALIZZAZIONE TIPO USO "LED RUN ------------------------- //
-    n_set_out_run = 4;      // set var x test tempistiche con oscilloscopio # NNB: E' ANCHE WRITE PROTECT RAM M1, M2, M3 -!!!! ToDO
-                            
-                            // 0 = NO
-                            
-                            // 1 = TIMER 1 (1msec)
-                            // 20 = TIMER 2 (20msec)
-                            // 100 = TIMER 3 (100msec)
-                            
-                            // 4 = CICLO a 1sec
-    
-                            // 30 = MAIN LOOP
-    
-                            // 50 = INTERRUPT 50/60Hz
-                               
-    
+    n_set_out_run =
+        4;     // set var x test tempistiche con oscilloscopio # NNB: E' ANCHE WRITE PROTECT RAM M1, M2, M3 -!!!! ToDO
+
+    // 0 = NO
+
+    // 1 = TIMER 1 (1msec)
+    // 20 = TIMER 2 (20msec)
+    // 100 = TIMER 3 (100msec)
+
+    // 4 = CICLO a 1sec
+
+    // 30 = MAIN LOOP
+
+    // 50 = INTERRUPT 50/60Hz
+
+
     Cambio_Pag(PAG_PRINCIPALE);
-    
+
     // MAIN LOOP ============================================================ //
     // MAIN LOOP ============================================================ //
     // MAIN LOOP ============================================================ //
     set_digout(led);
-    while(1)
+    while (1)
     {
-        if (pag_corrente != NULL && f_update) 
+        if (pag_corrente != NULL && f_update)
         {
             tasto = KeyBoard();
             pag_corrente->k_processor(tasto);
