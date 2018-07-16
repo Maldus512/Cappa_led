@@ -31,6 +31,7 @@ unsigned long timer_inibizione_sonde[4] = {0,0,0,0};
 char    f_100ms = 0;
 char    f_500ms = 0;
 char    f_1s = 0;
+char    f_update = 0;
 
 int     pwm_off_time = 0;
 char    f_blink = 0;
@@ -177,8 +178,8 @@ void __attribute__((interrupt, auto_psv)) _T2Interrupt (void)
 {
     static int counter_100ms = 0;
     static int counter_500ms = 0;
-    char tasto;
 
+    f_update = 1;
     
     if(n_set_out_run==20)
         LED_RUN = ~LED_RUN;
@@ -186,14 +187,7 @@ void __attribute__((interrupt, auto_psv)) _T2Interrupt (void)
     if(n_set_out_run==21) // ~40us
         LED_RUN = 1;
     
-    
-    
-    tasto = KeyBoard();
-    
-    if (pag_corrente != NULL) 
-    {
-        pag_corrente->k_processor(tasto);
-    }
+
     
     t2counter ++;
     
@@ -222,10 +216,7 @@ void __attribute__((interrupt, auto_psv)) _T2Interrupt (void)
     }
     
     
-    if (pag_corrente != NULL)
-    {
-        pag_corrente->d_processor();
-    }
+
         
     if(n_set_out_run==21)
         LED_RUN = 0;

@@ -24,11 +24,11 @@
 
 extern int old_livello_accesso;
 
-#define MAX_VELOCITA_4R     4  // 8+8+8+8
 
+#define NUM_RAMPE    4
 #define MAX_RAMPA    5
 
-extern int *rampe_velocita_50hz[MAX_VELOCITA_4R];
+extern int *rampe_velocita_50hz[NUM_RAMPE];
 
 
 typedef enum {
@@ -48,14 +48,11 @@ struct PARAMETRI_MACCHINA
     char   ver_pack_unpack_par_mac;// 000      ver.pack/unpack utilizzata per i PARAMETRI MACCHINA
                                             //          da inserire in testa al pacchetto dati                                  n.ro    0-255
 
-    unsigned int     lingua;                 
-    char    logo_ditta_vis;
     unsigned int     rampa;
     int     vel_ventola;
     char    potenziometro;
     unsigned int     timer_start;
     unsigned int     timer_stop;
-    char    tipo_motore;
 };
 
 extern struct PARAMETRI_MACCHINA parmac;

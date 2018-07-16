@@ -38,7 +38,6 @@ static void display_processor()
     int  i;
     OUTPUT led;
     int *rampa;
-    char val;
 
     rampa = rampe_velocita_50hz[parmac.rampa];
     
@@ -60,7 +59,7 @@ static void display_processor()
     if (f_new_pag==1)
     {
         f_pwm_on = 0;
-        parmac.vel_ventola = 0;
+        //parmac.vel_ventola = 0;
         
         f_new_pag = 0;
     }
@@ -147,11 +146,12 @@ static void keyboard_processor(char cKey)
     rampa = rampe_velocita_50hz[parmac.rampa];
     
     // gestione tasti senza repeat ========================================== //
-    if (cKey != 0 && cKey != 0xFF && OneShot)
+    if (OneShot)
     {
         switch (cKey)
         {
-
+            
+                
             case P_DX: /* --------------------------------------------- */
                 if (f_pwm_on && timer_start == 0)
                 {
@@ -204,6 +204,7 @@ static void keyboard_processor(char cKey)
                 if (timer_start == 0 && timer_stop == 0)
                     setVelocita(rampa[parmac.vel_ventola]);
 
+                saveParMac(parmac);
                 f_clear_pag = 1;
                 break;
 
@@ -215,9 +216,22 @@ static void keyboard_processor(char cKey)
                 if (timer_start == 0 && timer_stop == 0)
                     setVelocita(rampa[parmac.vel_ventola]);
 
+                saveParMac(parmac);
                 f_clear_pag = 1;
                 break;
 
+            default:
+                break;
+        }
+    }
+    else {
+        switch(cKey)
+        {
+            case P_PIU_MENO:
+                if (Key_repeat_cnt > 100 && f_pwm_on == 0)
+                    Cambio_Pag(PAG_RAMPE);
+                break;
+                
             default:
                 break;
         }

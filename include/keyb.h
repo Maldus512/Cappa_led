@@ -39,6 +39,7 @@
 
 
 extern unsigned char            OneShot;
+extern unsigned int            Key_repeat_cnt;
 
 /*----------------------------------------------------------------------------*/
 /*  prototipi funzioni                                                        */

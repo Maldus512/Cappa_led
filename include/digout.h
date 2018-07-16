@@ -63,5 +63,6 @@ void clear_digout_all(void);
 
 void set_digout_all(void);
 
+#define toggle_digout(out)      update_digout(out, ~get_digout(out))
 
 #endif	/* DIGOUT_H */

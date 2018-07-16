@@ -59,6 +59,7 @@
         <logicalFolder name="paginate" displayName="paginate" projectFiles="true">
           <itemPath>source/paginate/dispfunz.c</itemPath>
           <itemPath>source/paginate/pag_principale.c</itemPath>
+          <itemPath>source/paginate/pag_rampe.c</itemPath>
         </logicalFolder>
         <itemPath>source/main.c</itemPath>
         <itemPath>source/traps.c</itemPath>

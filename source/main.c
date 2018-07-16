@@ -78,7 +78,7 @@ const unsigned char str_versione_prog[] = "[V:00.3 D:11/05/2018]\0"; // 21 CHR
 #include "test_suite.h"
 #include "MCP4018/rheostat.h"
 #include "variabili_parametri_macchina.h"
-#include "i2c_bitbang.h"
+#include "i2c_driver.h"
 #include "digout.h"
 #include "EEPROM/24XX16.h"
 #include "dispfunz.h"
@@ -96,9 +96,10 @@ int main(void)
     delay_ms(250);
     
     Init_GPIO();
-    Init_I2C_bitbang();
-        
-    //loadParMac(&parmac);
+    Init_I2C();
+    
+    //saveParMac(parmac);
+    loadParMac(&parmac);
 
     
     Init_Timers();
@@ -124,20 +125,7 @@ int main(void)
                             // 30 = MAIN LOOP
     
                             // 50 = INTERRUPT 50/60Hz
-                                
-
-    int x = 20;
-    unsigned char byte = 0;
-    
-    byteWrite_24XX16(0xA0, 0x00, 0xFF, 0xBB);
-    
-    byteRead_24XX16(0xA0, 0x00, 0xFF, &byte);
-    
-    if (byte != 0x00) {
-        Nop();
-        Nop();
-        Nop();
-    }
+                               
     
     Cambio_Pag(PAG_PRINCIPALE);
     
@@ -147,36 +135,13 @@ int main(void)
     set_digout(led);
     while(1)
     {
-//        tasto = KeyBoard();
-//        
-//        if (tasto != 0 && tasto != 0xFF && OneShot == 1) {
-//            
-////            OneShot = 0;
-////            
-////            if (f_pwm_on) {
-////                f_pwm_on = 0;
-////            }
-////            else {
-////                x += 10;
-////                if (x > 100) {
-////                    x = 20;
-////                }
-////
-////                setVelocita(x);
-////                f_pwm_on = 1;
-////            }
-//            
-//            clear_digout_all();
-//            led++;
-//            if (led == NUM_OUTPUT) {
-//                led = OUT_RELE1;
-//            }
-//            set_digout(led);
-//        }
-//        
-//        Nop();
-//        Nop();
-//        Nop();
+        if (pag_corrente != NULL && f_update) 
+        {
+            tasto = KeyBoard();
+            pag_corrente->k_processor(tasto);
+            pag_corrente->d_processor();
+            f_update = 0;
+        }
     }
     return 0;
 }

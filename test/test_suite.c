@@ -34,9 +34,9 @@ uint8 eeprom24XX26_eds_test()
         COUNTBYTE(x);
         test_array_eds[i] = x;
     }
-    AbsSequentialWriteI2C(TEST_CONTROL_BYTE, TEST_ADDRESS, test_array_eds, ARRAY_SIZE);
+    sequentialWrite_24XX16(TEST_CONTROL_BYTE, TEST_ADDRESS, test_array_eds, ARRAY_SIZE);
     reset();
-    AbsSequentialReadI2C(TEST_CONTROL_BYTE, TEST_ADDRESS, test_array_eds, ARRAY_SIZE);
+    sequentialRead_24XX16(TEST_CONTROL_BYTE, TEST_ADDRESS, test_array_eds, ARRAY_SIZE);
     
     for (i = 0; i < ARRAY_SIZE; i++)
     {

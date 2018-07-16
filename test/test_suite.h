@@ -10,7 +10,7 @@
 
 
 #define TEST_CONTROL_BYTE   0xA0
-#define TEST_ADDRESS        0x0000
+#define TEST_ADDRESS        0x00, 0x00
 
 
 

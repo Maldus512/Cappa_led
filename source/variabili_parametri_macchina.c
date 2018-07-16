@@ -20,13 +20,13 @@
 
 int old_livello_accesso = 0;
 
-int rampa1[] = {30, 45, 60, 80, 99};
-int rampa2[] = {30, 40, 60, 80, 99};
-int rampa3[] = {30, 40, 50, 60, 80};
-int rampa4[] = {30, 40, 50, 70, 99};
+int rampa1[] = {20, 35, 50, 60, 100};
+int rampa2[] =  {20, 35, 50, 65, 100};
+int rampa3[] = {20, 35, 50, 70, 100};
+int rampa4[] = {20, 35, 50, 70, 100};
 
 
-int *rampe_velocita_50hz[MAX_VELOCITA_4R] = {
+int *rampe_velocita_50hz[NUM_RAMPE] = {
     rampa1,
     rampa2, 
     rampa3,
@@ -44,21 +44,18 @@ struct PARAMETRI_MACCHINA parmac =
     .ver_pack_unpack_par_mac = 0,   // 000      ver.pack/unpack utilizzata per i PARAMETRI MACCHINA
                                                         //          da inserire in testa al pacchetto dati                              n.ro    0-255
     
-    .lingua = 0,                    // 001                      lingua visualizzazione scritte (0=I,1=GB,2=F,3=E,4=D,5=GR, ...)     n.ro    0-9
-    .logo_ditta_vis = 1,            // 002                      logo ditta da visulizzare (0=HSW, 1=ANO, 2=MSG, 3=ROT)              n.ro    0-250
     .rampa = 0,
     .vel_ventola = 0,
     .potenziometro = 0,
     .timer_start = 15,
     .timer_stop = 15,
-    .tipo_motore = MOTORE_CUSTOM,
 };
 
 
 int saveParMac(struct PARAMETRI_MACCHINA p) {
-    return HDSequentialWriteI2C(MEM_16_B0, 0x00, 0x01, (unsigned char*)&p, sizeof(struct PARAMETRI_MACCHINA));
+    return sequentialWrite_24XX16(MEM_16_B0, 0x00, 0x01, (unsigned char*)&p, sizeof(struct PARAMETRI_MACCHINA));
 }
 
 int loadParMac(struct PARAMETRI_MACCHINA* p) {
-    return HDSequentialReadI2C(MEM_16_B0, 0x00, 0x01, (unsigned char*)p, sizeof(struct PARAMETRI_MACCHINA));
+    return sequentialRead_24XX16(MEM_16_B0, 0x00, 0x01, (unsigned char*)p, sizeof(struct PARAMETRI_MACCHINA));
 }

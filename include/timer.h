@@ -29,6 +29,7 @@ void initTimer3 (void);
 extern char     f_100ms;
 extern char     f_500ms;
 extern char     f_1s;
+extern char     f_update;
 
 
 extern char     f_blink;
