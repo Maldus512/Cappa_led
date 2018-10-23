@@ -90,10 +90,10 @@
 #define OUT_09_TRIS             TRISCbits.TRISC2
 #define OUT_10                  LATCbits.LATC3
 #define OUT_10_TRIS             TRISCbits.TRISC3
-#define OUT_11                  LATCbits.LATC4
-#define OUT_11_TRIS             TRISCbits.TRISC4
-#define OUT_12                  LATCbits.LATC5
-#define OUT_12_TRIS             TRISCbits.TRISC5
+#define OUT_11                  LATCbits.LATC5
+#define OUT_11_TRIS             TRISCbits.TRISC5
+#define OUT_12                  LATCbits.LATC4
+#define OUT_12_TRIS             TRISCbits.TRISC4
 
 
 #define TRIAC                   OUT_01

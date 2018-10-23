@@ -101,29 +101,30 @@ static void display_processor()
 
 
         led = OUT_LED1;
-        for (i = 0; i < MAX_RAMPA; i++)
-        {
-            if (i <= parmac.vel_ventola)
-            {
-                set_digout(led);
-            }
-            else
-            {
-                clear_digout(led);
-            }
-
-            led++;
-        }
-
         if (timer != 0 && blink)
         {
-            led = OUT_LED1;
             for (i = 0; i < MAX_RAMPA; i++)
             {
                 clear_digout(led);
                 led++;
             }
         }
+        else {
+            for (i = 0; i < MAX_RAMPA; i++)
+            {
+                if (i <= parmac.vel_ventola)
+                {
+                    set_digout(led);
+                }
+                else
+                {
+                    clear_digout(led);
+                }
+
+                led++;
+            }
+        }
+        
 
 
         f_1s        = 0;

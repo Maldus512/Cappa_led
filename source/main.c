@@ -90,6 +90,9 @@ const unsigned char str_versione_prog[] = "[V:00.3 D:11/05/2018]\0";     // 21 C
 // ========================================================================== //
 int main(void)
 {
+    char blinker = 0;
+    int i = 0;
+    unsigned char test = 0x00;
     unsigned char tasto = 0;
     OUTPUT        led   = OUT_LED1P1;
     Configure_Oscillator();
@@ -97,9 +100,36 @@ int main(void)
 
     Init_GPIO();
     Init_I2C();
+    
+    byteRead_24XX16(MEM_16_B0, 0x00, 0x00, &test);
 
-    // saveParMac(parmac);
-    loadParMac(&parmac);
+    if (test == 0xAA) {
+        loadParMac(&parmac);
+    }
+    else {
+        byteWrite_24XX16(MEM_16_B0, 0x00, 0x00, 0xAA);
+        test = 0x00;
+        byteRead_24XX16(MEM_16_B0, 0x00, 0x00, &test);
+
+        if (test != 0xAA) {
+            while(1) {
+                delay_ms(300);
+                led = OUT_LED1;
+                for (i = 0; i < MAX_RAMPA; i++)
+                {
+                    if (blinker == 0)
+                        clear_digout(led);
+                    else 
+                        set_digout(led);
+                    led++;
+                }
+                blinker = blinker == 0 ? 1 : 0;
+            }
+            return 0;
+        }
+        
+        saveParMac(parmac);
+    }
 
 
     Init_Timers();

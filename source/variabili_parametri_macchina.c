@@ -55,4 +55,6 @@ int saveParMac(struct PARAMETRI_MACCHINA p)
 int loadParMac(struct PARAMETRI_MACCHINA *p)
 {
     return sequentialRead_24XX16(MEM_16_B0, 0x00, 0x01, (unsigned char *)p, sizeof(struct PARAMETRI_MACCHINA));
+    p->timer_start = 15;
+    p->timer_stop = 15;
 }
