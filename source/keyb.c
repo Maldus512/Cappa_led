@@ -49,7 +49,8 @@ unsigned char n_rip_tas;
 unsigned long n_rip_tas_ko;
 
 
-
+unsigned char previouslyFoundKey = 0;
+unsigned int keyDebounceCounter = 0;
 
 
 /*----------------------------------------------------------------------------*/
@@ -58,7 +59,8 @@ unsigned long n_rip_tas_ko;
 
 const KEYB Ckeyboard[] =     //          NR  STD HSW
     {{0x05, 0x0003},         //          05  P_MENO + P_PIU  [T]
-
+    {0x06, 0x000B},
+    {0x07, 0x0007},
      {0x01, 0x0008},     //          01  P_SX            [S]
      {0x02, 0x0004},     //          02  P_DX            [D]
      {0x03, 0x0001},     //          03  P_PIU           [+]
@@ -81,14 +83,8 @@ unsigned char KeyBoard(void)
 
     n_rip_tas = 0;
 
-    //    if (pag_corrente == NULL)
-    //        return(0);
 
     nKey = InKey();
-
-
-
-
 
     if (nKey)     // CP se ho premuto un tasto
     {
@@ -104,6 +100,21 @@ unsigned char KeyBoard(void)
             }
             x++;
         }
+        
+        if (cKey == 0xFF) {
+            previouslyFoundKey = cKey;
+            keyDebounceCounter = 0;
+        }
+        else if (cKey != 0xFF && cKey == previouslyFoundKey && keyDebounceCounter <= 2) {
+            keyDebounceCounter++;
+            return 0xFF;
+        }
+        else if (cKey != 0xFF && cKey != previouslyFoundKey) {
+            previouslyFoundKey = cKey;
+            keyDebounceCounter = 0;
+            return 0xFF;
+        }
+        
 
         /*----------------------------------------------------------------*/
         /* aggiorna solo se il codice tasto VALIDO                        */

@@ -59,7 +59,7 @@
         <logicalFolder name="paginate" displayName="paginate" projectFiles="true">
           <itemPath>source/paginate/dispfunz.c</itemPath>
           <itemPath>source/paginate/pag_principale.c</itemPath>
-          <itemPath>source/paginate/pag_rampe.c</itemPath>
+          <itemPath>source/paginate/pag_config.c</itemPath>
         </logicalFolder>
         <itemPath>source/main.c</itemPath>
         <itemPath>source/traps.c</itemPath>
@@ -85,6 +85,14 @@
     </logicalFolder>
     <itemPath>Versioning.txt</itemPath>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>Grlib128x64/inc</Elem>
+    <Elem>GRAPH</Elem>
+    <Elem>drivers</Elem>
+    <Elem>test</Elem>
+    <Elem>source</Elem>
+    <Elem>include</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="default" type="2">
@@ -93,7 +101,7 @@
         <targetDevice>PIC24FJ128GA704</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>PICkit3PlatformTool</platformTool>
+        <platformTool>ICD3PlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
         <languageToolchainVersion>1.33</languageToolchainVersion>
         <platform>3</platform>

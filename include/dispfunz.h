@@ -40,7 +40,7 @@ typedef struct _paginata
 extern PAGINATA *pag_corrente;
 
 extern PAGINATA *PAG_PRINCIPALE;
-extern PAGINATA *PAG_RAMPE;
+extern PAGINATA *PAG_CONFIG;
 
 
 

@@ -37,6 +37,10 @@
 #define P_MENO          0x04    // [-]
 #define P_PIU_MENO      0x05
 
+#define P_PIU_MENO_GIU   0x06
+#define P_PIU_MENO_SU    0x07
+
+
 
 extern unsigned char            OneShot;
 extern unsigned int            Key_repeat_cnt;

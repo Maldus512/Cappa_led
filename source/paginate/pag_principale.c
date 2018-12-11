@@ -152,15 +152,22 @@ static void display_processor()
 static void keyboard_processor(char cKey)
 {
     int *rampa;
+    char f_passwordOk = 0;
+    const char password[4] = {P_PIU_MENO_GIU, P_PIU_MENO_SU, P_PIU_MENO_GIU, P_PIU_MENO_SU};
+    static char passwordInserita[4] = {0};
+    static int index = 0;
+    int i;
     rampa = rampe_velocita_50hz[parmac.rampa];
+    
+    if (cKey == 0x00) {
+        index = 0;
+    }
 
     // gestione tasti senza repeat ========================================== //
     if (OneShot)
     {
         switch (cKey)
         {
-
-
             case P_DX: /* --------------------------------------------- */
                 if (f_pwm_on && timer_start == 0)
                 {
@@ -209,40 +216,45 @@ static void keyboard_processor(char cKey)
 
             case P_PIU: /* -------------------------------------------- */
 
-                if (parmac.vel_ventola < MAX_RAMPA - 1)
+                if (timer_start == 0 && timer_stop == 0 && parmac.vel_ventola < MAX_RAMPA - 1) {
                     parmac.vel_ventola++;
-
                 /* Setta la velocita solo se non sono in attesa di un timer*/
-                if (timer_start == 0 && timer_stop == 0)
                     setVelocita(rampa[parmac.vel_ventola]);
-
-                saveParMac(parmac);
+                    saveParMac(parmac);
+                }
+                    
                 f_clear_pag = 1;
                 break;
 
             case P_MENO: /* ------------------------------------------- */
-                if (parmac.vel_ventola > 0)
+                if (timer_start == 0 && timer_stop == 0 && parmac.vel_ventola > 0) {
                     parmac.vel_ventola--;
-
                 /* Setta la velocita solo se non sono in attesa di un timer*/
-                if (timer_start == 0 && timer_stop == 0)
                     setVelocita(rampa[parmac.vel_ventola]);
+                    saveParMac(parmac);
+                }
 
-                saveParMac(parmac);
                 f_clear_pag = 1;
                 break;
+                
+            case P_PIU_MENO_SU:
+            case P_PIU_MENO_GIU:
+                if (timer_start == 0 && timer_stop == 0) {
+                    passwordInserita[index++] = cKey;
 
-            default:
-                break;
-        }
-    }
-    else
-    {
-        switch (cKey)
-        {
-            case P_PIU_MENO:
-                if (Key_repeat_cnt > 100 && f_pwm_on == 0)
-                    Cambio_Pag(PAG_RAMPE);
+                    if (index == 4) {
+                        index = 0;
+                        f_passwordOk = 1;
+                        for (i = 0; i < 4; i++) {
+                            if (passwordInserita[i] != password[i]) {
+                                f_passwordOk = 0;
+                                break;
+                            }
+                        }
+                    }
+                    if (f_passwordOk && f_pwm_on == 0)
+                        Cambio_Pag(PAG_CONFIG);
+                }
                 break;
 
             default:

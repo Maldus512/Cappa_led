@@ -26,10 +26,44 @@
 #include "peripherals.h"
 
 
+
+int display_led_config() {
+    int i = 0, change_led;
+    OUTPUT led = OUT_LED1;
+    if (parmac.timer_start == 15 && parmac.timer_stop == 15) {
+        change_led = 1;
+    }
+    else if (parmac.timer_start == 0 && parmac.timer_stop == 0) {
+        change_led = 2;
+    }
+    else if (parmac.timer_start == 15 && parmac.timer_stop == 0) {
+        change_led = 3;
+    }
+    else if (parmac.timer_start == 0 && parmac.timer_stop == 15) {
+        change_led = 4;
+    }
+    else {
+        change_led = 0;
+    }
+    
+    for (i = 0; i < 4; i++)
+    {
+        if (i < change_led)
+        {
+            set_digout(led);
+        }
+        else
+        {
+            clear_digout(led);
+        }
+        led++;
+    }
+    
+    return 0;
+}
+
 static void display_processor()
 {
-    int    i;
-    OUTPUT led;
     if (f_new_pag == 1)
     {
         f_pwm_on = 0;
@@ -45,20 +79,7 @@ static void display_processor()
             toggle_digout(OUT_LED5);
         }
 
-        led = OUT_LED1;
-        for (i = 0; i < 4; i++)
-        {
-            if (i <= parmac.rampa)
-            {
-                set_digout(led);
-            }
-            else
-            {
-                clear_digout(led);
-            }
-            led++;
-        }
-
+        display_led_config();
 
         f_500ms     = 0;
         f_clear_pag = 0;
@@ -86,18 +107,51 @@ static void keyboard_processor(char cKey)
                 Indietro();
                 break;
 
-            case P_PIU: /* -------------------------------------------- */
-
-                if (parmac.rampa < NUM_RAMPE - 1)
-                    parmac.rampa++;
+            case P_PIU: /* -------------------------------------------- */               
+                if (parmac.timer_start == 15 && parmac.timer_stop == 15) {
+                    parmac.timer_start = 0;
+                    parmac.timer_stop = 0;
+                }
+                else if (parmac.timer_start == 0 && parmac.timer_stop == 0) {
+                    parmac.timer_start = 15;
+                    parmac.timer_stop = 0;
+                }
+                else if (parmac.timer_start == 15 && parmac.timer_stop == 0) {
+                    parmac.timer_start = 0;
+                    parmac.timer_stop = 15;
+                }
+                else if (parmac.timer_start == 0 && parmac.timer_stop == 15) {
+                    Nop();
+                }
+                else {
+                    parmac.timer_start = 15;
+                    parmac.timer_stop = 15;
+                }
 
                 saveParMac(parmac);
                 f_clear_pag = 1;
                 break;
 
             case P_MENO: /* ------------------------------------------- */
-                if (parmac.rampa > 0)
-                    parmac.rampa--;
+                if (parmac.timer_start == 15 && parmac.timer_stop == 15) {
+                    Nop();
+                }
+                else if (parmac.timer_start == 0 && parmac.timer_stop == 0) {
+                    parmac.timer_start = 15;
+                    parmac.timer_stop = 15;
+                }
+                else if (parmac.timer_start == 15 && parmac.timer_stop == 0) {
+                    parmac.timer_start = 0;
+                    parmac.timer_stop = 0;
+                }
+                else if (parmac.timer_start == 0 && parmac.timer_stop == 15) {
+                    parmac.timer_start = 15;
+                    parmac.timer_stop = 0;
+                }
+                else {
+                    parmac.timer_start = 15;
+                    parmac.timer_stop = 15;
+                }
 
                 saveParMac(parmac);
                 f_clear_pag = 1;
@@ -109,8 +163,8 @@ static void keyboard_processor(char cKey)
     }
 }
 
-PAGINATA pag_rampe_struct = {
+PAGINATA pag_config_struct = {
     .d_processor = display_processor, .k_processor = keyboard_processor, .tipo = DEF,
 };
 
-PAGINATA *PAG_RAMPE = &pag_rampe_struct;
+PAGINATA *PAG_CONFIG = &pag_config_struct;
