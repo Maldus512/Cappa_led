@@ -91,7 +91,7 @@ static void display_processor()
 static void keyboard_processor(char cKey)
 {
     int *rampa;
-    rampa = rampe_velocita_50hz[parmac.rampa];
+    rampa = rampa_velocita_50hz;
 
     // gestione tasti senza repeat ========================================== //
     if (cKey != 0 && cKey != 0xFF && OneShot)

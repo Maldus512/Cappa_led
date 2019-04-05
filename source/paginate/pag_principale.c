@@ -39,7 +39,7 @@ static void display_processor()
     OUTPUT                    led;
     int *                     rampa;
 
-    rampa = rampe_velocita_50hz[parmac.rampa];
+    rampa = rampa_velocita_50hz;
 
     if (timer_start != 0)
     {
@@ -157,7 +157,7 @@ static void keyboard_processor(char cKey)
     static char passwordInserita[4] = {0};
     static int index = 0;
     int i;
-    rampa = rampe_velocita_50hz[parmac.rampa];
+    rampa = rampa_velocita_50hz;
     
     if (cKey == 0x00) {
         index = 0;

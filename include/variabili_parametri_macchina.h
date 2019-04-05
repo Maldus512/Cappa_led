@@ -24,11 +24,9 @@
 
 extern int old_livello_accesso;
 
-
-#define NUM_RAMPE    4
 #define MAX_RAMPA    5
 
-extern int *rampe_velocita_50hz[NUM_RAMPE];
+extern int rampa_velocita_50hz[MAX_RAMPA];
 
 
 typedef enum {

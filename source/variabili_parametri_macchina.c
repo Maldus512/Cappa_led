@@ -18,15 +18,7 @@
 #include "variabili_parametri_macchina.h"
 #include "i2c_module2.h"
 
-int old_livello_accesso = 0;
-
-int rampa1[] = {20, 35, 50, 60, 100};
-int rampa2[] = {20, 35, 50, 65, 100};
-int rampa3[] = {20, 35, 50, 70, 100};
-int rampa4[] = {20, 35, 50, 70, 100};
-
-
-int *rampe_velocita_50hz[NUM_RAMPE] = {rampa1, rampa2, rampa3, rampa4};
+int rampa_velocita_50hz[MAX_RAMPA] = {45, 51, 57, 65, 100};
 
 /* -------------------------------------------------------------------------- */
 /*  parametri macchina                                                        */
@@ -54,11 +46,12 @@ int saveParMac(struct PARAMETRI_MACCHINA p)
 
 int loadParMac(struct PARAMETRI_MACCHINA *p)
 {
-    return sequentialRead_24XX16(MEM_16_B0, 0x00, 0x01, (unsigned char *)p, sizeof(struct PARAMETRI_MACCHINA));
+    int res = sequentialRead_24XX16(MEM_16_B0, 0x00, 0x01, (unsigned char *)p, sizeof(struct PARAMETRI_MACCHINA));
     if (p->timer_start > 15) {
         p->timer_start = 15;
     }
     if (p->timer_stop > 15) {
         p->timer_stop = 15;
     }
+    return res;
 }
