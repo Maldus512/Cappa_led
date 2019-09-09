@@ -67,7 +67,7 @@
     ENABLE /* Downside Voltage Protection Enable bit (Downside protection enabled using ZPBOR when BOR is inactive) */
 
 /* FICD */
-#pragma config ICS    = PGD2 /* ICD Communication Channel Select bits (Communicate on PGEC1 and PGED1) */
+#pragma config ICS    = PGD3 /* ICD Communication Channel Select bits (Communicate on PGEC1 and PGED1) */
 #pragma config JTAGEN = OFF  /* JTAG Enable bit (JTAG is disabled) */
 
 /* FDEVOPT1 */

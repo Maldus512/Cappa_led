@@ -43,12 +43,7 @@ typedef enum {
 struct PARAMETRI_MACCHINA
 {
 // -------------------------------------------------------------------------------------------------------------------------------  UM      RANGE       TEST 0  PM 1    PM 2    PM 3    PM 4    PM 5    PM 6    RID
-    char   ver_pack_unpack_par_mac;// 000      ver.pack/unpack utilizzata per i PARAMETRI MACCHINA
-                                            //          da inserire in testa al pacchetto dati                                  n.ro    0-255
-
-    unsigned int     rampa;
     int     vel_ventola;
-    char    potenziometro;
     unsigned int     timer_start;
     unsigned int     timer_stop;
 };
@@ -58,5 +53,6 @@ extern struct PARAMETRI_MACCHINA parmac;
 
 int saveParMac(struct PARAMETRI_MACCHINA p);
 int loadParMac(struct PARAMETRI_MACCHINA* p);
+int parmacChanged(struct PARAMETRI_MACCHINA *oldparmac, struct PARAMETRI_MACCHINA *curparmac);
 
 #endif	/* VARIABILI_PARAMETRI_MACCHINA_H */

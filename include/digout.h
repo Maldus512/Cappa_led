@@ -41,6 +41,8 @@ typedef enum {
             OUT_LED3,
             OUT_LED4,
             OUT_LED5,
+            OUT_LEDP3,
+            OUT_LEDP4,
             
             NUM_OUTPUT
 

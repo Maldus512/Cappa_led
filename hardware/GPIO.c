@@ -28,6 +28,7 @@ void Init_GPIO(void)
 
     ANSA = 0;
     ANSB = 0;
+    ANSC = 0;
 
 
     /* Keyboard */
@@ -51,6 +52,9 @@ void Init_GPIO(void)
     OUT_10_TRIS = OUT;
     OUT_11_TRIS = OUT;
     OUT_12_TRIS = OUT;
+    OUT_13_TRIS = OUT;
+    OUT_14_TRIS = OUT;
+
 
     OUT_01 = 0;
     OUT_02 = 0;
@@ -64,30 +68,33 @@ void Init_GPIO(void)
     OUT_10 = 0;
     OUT_11 = 0;
     OUT_12 = 0;
+    OUT_13 = 0;
+    OUT_14 = 0;
+
 
     LED_RUN_TRIS = OUT;
 
     LED_RUN = 0;
 
     /* Tiro a massa tutti i pin del micro che non utilizziamo */
-    UNUSED0_TRIS = OUT;
-    UNUSED1_TRIS = OUT;
-    UNUSED2_TRIS = OUT;
-
-    UNUSED4_TRIS = OUT;
-    UNUSED5_TRIS = OUT;
-    UNUSED6_TRIS = OUT;
-    UNUSED7_TRIS = OUT;
-
-
-
-
-    UNUSED0 = 0;
-    UNUSED1 = 0;
-    UNUSED2 = 0;
-
-    UNUSED4 = 0;
-    UNUSED5 = 0;
-    UNUSED6 = 0;
-    UNUSED7 = 0;
+//    UNUSED0_TRIS = OUT;
+//    UNUSED1_TRIS = OUT;
+//    UNUSED2_TRIS = OUT;
+//
+//    UNUSED4_TRIS = OUT;
+//    UNUSED5_TRIS = OUT;
+//    UNUSED6_TRIS = OUT;
+//    UNUSED7_TRIS = OUT;
+//
+//
+//
+//
+//    UNUSED0 = 0;
+//    UNUSED1 = 0;
+//    UNUSED2 = 0;
+//
+//    UNUSED4 = 0;
+//    UNUSED5 = 0;
+//    UNUSED6 = 0;
+//    UNUSED7 = 0;
 }

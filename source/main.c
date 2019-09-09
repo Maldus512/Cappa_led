@@ -66,7 +66,7 @@ const unsigned char str_versione_prog[] = "[V:00.3 D:11/05/2018]\0";     // 21 C
 /*      - CREATA GT "TESTATA"                                                 */
 /*                                                                            */
 /******************************************************************************/
-
+#include <string.h>
 #include "HardwareProfile.h"
 #include "system.h"
 #include "timer.h"
@@ -76,7 +76,6 @@ const unsigned char str_versione_prog[] = "[V:00.3 D:11/05/2018]\0";     // 21 C
 #include "peripherals.h"
 #include "keyb.h"
 #include "test_suite.h"
-#include "MCP4018/rheostat.h"
 #include "variabili_parametri_macchina.h"
 #include "i2c_driver.h"
 #include "digout.h"
@@ -90,36 +89,42 @@ const unsigned char str_versione_prog[] = "[V:00.3 D:11/05/2018]\0";     // 21 C
 // ========================================================================== //
 int main(void)
 {
-    char blinker = 0;
-    int i = 0;
-    unsigned char test = 0x00;
-    unsigned char tasto = 0;
-    OUTPUT        led   = OUT_LED1P1;
+    struct PARAMETRI_MACCHINA oldparmac;
+    unsigned long long        ts      = 0;
+    char                      blinker = 0, f_tosave = 0;
+    int                       i     = 0;
+    unsigned char             test  = 0x00;
+    unsigned char             tasto = 0;
+    OUTPUT                    led   = OUT_LED1P1;
     Configure_Oscillator();
     delay_ms(250);
 
     Init_GPIO();
     Init_I2C();
-    
+
     byteRead_24XX16(MEM_16_B0, 0x00, 0x00, &test);
 
-    if (test == 0xAA) {
+    if (test == 0xAA)
+    {
         loadParMac(&parmac);
     }
-    else {
+    else
+    {
         byteWrite_24XX16(MEM_16_B0, 0x00, 0x00, 0xAA);
         test = 0x00;
         byteRead_24XX16(MEM_16_B0, 0x00, 0x00, &test);
 
-        if (test != 0xAA) {
-            while(1) {
+        if (test != 0xAA)
+        {
+            while (1)
+            {
                 delay_ms(300);
                 led = OUT_LED1;
                 for (i = 0; i < MAX_RAMPA; i++)
                 {
                     if (blinker == 0)
                         clear_digout(led);
-                    else 
+                    else
                         set_digout(led);
                     led++;
                 }
@@ -127,7 +132,7 @@ int main(void)
             }
             return 0;
         }
-        
+
         saveParMac(parmac);
     }
 
@@ -137,8 +142,6 @@ int main(void)
     Init_ZeroCrossing();
 
 
-
-    setRheostatValue(parmac.potenziometro);
 
     delay_ms(500);
     // INIZIALIZZAZIONE TIPO USO "LED RUN ------------------------- //
@@ -163,6 +166,7 @@ int main(void)
     // MAIN LOOP ============================================================ //
     // MAIN LOOP ============================================================ //
     // MAIN LOOP ============================================================ //
+    memcpy(&oldparmac, &parmac, sizeof(struct PARAMETRI_MACCHINA));
     set_digout(led);
     while (1)
     {
@@ -172,6 +176,21 @@ int main(void)
             pag_corrente->k_processor(tasto);
             pag_corrente->d_processor();
             f_update = 0;
+        }
+
+
+        // Se c'e' una modifica salvala dopo 5 secondi
+        if (parmacChanged(&oldparmac, &parmac))
+        {
+            memcpy(&oldparmac, &parmac, sizeof(struct PARAMETRI_MACCHINA));
+            ts       = getTimestamp();
+            f_tosave = 1;
+        }
+
+        if (f_tosave && getTimestamp() - ts > 5)
+        {
+            saveParMac(parmac);
+            f_tosave = 0;
         }
     }
     return 0;

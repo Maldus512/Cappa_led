@@ -49,20 +49,20 @@ void update_digout(OUTPUT dig_out, unsigned char val)
             OUT_03 = val;
             break;
 
-        case OUT_LED1P1:
-            OUT_04 = val;
-            break;
-
-        case OUT_LED2P1:
+        case OUT_LED1P2:
             OUT_05 = val;
             break;
 
-        case OUT_LED1P2:
-            OUT_06 = val;
+        case OUT_LED2P2:
+            OUT_04 = val;
             break;
 
-        case OUT_LED2P2:
+        case OUT_LED1P1:
             OUT_07 = val;
+            break;
+
+        case OUT_LED2P1:
+            OUT_06 = val;
             break;
 
         case OUT_LED1:
@@ -83,6 +83,14 @@ void update_digout(OUTPUT dig_out, unsigned char val)
 
         case OUT_LED5:
             OUT_12 = val;
+            break;
+
+        case OUT_LEDP3:
+            OUT_13 = val;
+            break;
+
+        case OUT_LEDP4:
+            OUT_14 = val;
             break;
 
         default:
@@ -165,6 +173,14 @@ char get_digout(OUTPUT dig)
             return OUT_12;
             break;
 
+        case OUT_LEDP3:
+            return OUT_13;
+            break;
+
+        case OUT_LEDP4:
+            return OUT_14;
+            break;
+
         default:
             return (-1);
     }
@@ -194,6 +210,8 @@ void clear_digout_all(void)
     OUT_10 = 0;     // 01
     OUT_11 = 0;     // 02
     OUT_12 = 0;     // 03
+    OUT_13 = 0;     // 03
+    OUT_14 = 0;     // 03
 }
 
 
@@ -219,4 +237,6 @@ void set_digout_all(void)
     OUT_10 = 1;     // 01
     OUT_11 = 1;     // 02
     OUT_12 = 1;     // 03
+    OUT_13 = 1;     // 03
+    OUT_14 = 1;     // 03
 }

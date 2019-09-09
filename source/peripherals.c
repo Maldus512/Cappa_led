@@ -86,7 +86,7 @@ void __attribute__((interrupt, no_auto_psv)) _IOCInterrupt()
             if (ZERO_XING != zero_xing_old)
             {
                 TRIAC        = 0;
-                rit_val_pwm  = velocita_pwm;     // rampe_velocita_50hz[parmac.rampa][parmac.vel_ventola];
+                rit_val_pwm  = velocita_pwm;
                 pwm_off_time = 100 - rit_val_pwm;
 
                 if (pwm_off_time <= 10)

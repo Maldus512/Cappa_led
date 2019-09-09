@@ -27,25 +27,31 @@
 
 
 
-int display_led_config() {
-    int i = 0, change_led;
+int display_led_config()
+{
+    int    i   = 0, change_led;
     OUTPUT led = OUT_LED1;
-    if (parmac.timer_start == 15 && parmac.timer_stop == 15) {
+    if (parmac.timer_start == 15 && parmac.timer_stop == 15)
+    {
         change_led = 1;
     }
-    else if (parmac.timer_start == 0 && parmac.timer_stop == 0) {
+    else if (parmac.timer_start == 0 && parmac.timer_stop == 0)
+    {
         change_led = 2;
     }
-    else if (parmac.timer_start == 15 && parmac.timer_stop == 0) {
+    else if (parmac.timer_start == 15 && parmac.timer_stop == 0)
+    {
         change_led = 3;
     }
-    else if (parmac.timer_start == 0 && parmac.timer_stop == 15) {
+    else if (parmac.timer_start == 0 && parmac.timer_stop == 15)
+    {
         change_led = 4;
     }
-    else {
+    else
+    {
         change_led = 0;
     }
-    
+
     for (i = 0; i < 4; i++)
     {
         if (i < change_led)
@@ -58,7 +64,7 @@ int display_led_config() {
         }
         led++;
     }
-    
+
     return 0;
 }
 
@@ -100,60 +106,70 @@ static void keyboard_processor(char cKey)
         {
 
             case P_DX: /* --------------------------------------------- */
+                saveParMac(parmac);
                 Indietro();
                 break;
 
             case P_SX: /* --------------------------------------------- */
+                saveParMac(parmac);
                 Indietro();
                 break;
 
-            case P_PIU: /* -------------------------------------------- */               
-                if (parmac.timer_start == 15 && parmac.timer_stop == 15) {
+            case P_PIU: /* -------------------------------------------- */
+                if (parmac.timer_start == 15 && parmac.timer_stop == 15)
+                {
                     parmac.timer_start = 0;
-                    parmac.timer_stop = 0;
+                    parmac.timer_stop  = 0;
                 }
-                else if (parmac.timer_start == 0 && parmac.timer_stop == 0) {
+                else if (parmac.timer_start == 0 && parmac.timer_stop == 0)
+                {
                     parmac.timer_start = 15;
-                    parmac.timer_stop = 0;
+                    parmac.timer_stop  = 0;
                 }
-                else if (parmac.timer_start == 15 && parmac.timer_stop == 0) {
+                else if (parmac.timer_start == 15 && parmac.timer_stop == 0)
+                {
                     parmac.timer_start = 0;
-                    parmac.timer_stop = 15;
+                    parmac.timer_stop  = 15;
                 }
-                else if (parmac.timer_start == 0 && parmac.timer_stop == 15) {
+                else if (parmac.timer_start == 0 && parmac.timer_stop == 15)
+                {
                     Nop();
                 }
-                else {
+                else
+                {
                     parmac.timer_start = 15;
-                    parmac.timer_stop = 15;
+                    parmac.timer_stop  = 15;
                 }
 
-                saveParMac(parmac);
                 f_clear_pag = 1;
                 break;
 
             case P_MENO: /* ------------------------------------------- */
-                if (parmac.timer_start == 15 && parmac.timer_stop == 15) {
+                if (parmac.timer_start == 15 && parmac.timer_stop == 15)
+                {
                     Nop();
                 }
-                else if (parmac.timer_start == 0 && parmac.timer_stop == 0) {
+                else if (parmac.timer_start == 0 && parmac.timer_stop == 0)
+                {
                     parmac.timer_start = 15;
-                    parmac.timer_stop = 15;
+                    parmac.timer_stop  = 15;
                 }
-                else if (parmac.timer_start == 15 && parmac.timer_stop == 0) {
+                else if (parmac.timer_start == 15 && parmac.timer_stop == 0)
+                {
                     parmac.timer_start = 0;
-                    parmac.timer_stop = 0;
+                    parmac.timer_stop  = 0;
                 }
-                else if (parmac.timer_start == 0 && parmac.timer_stop == 15) {
+                else if (parmac.timer_start == 0 && parmac.timer_stop == 15)
+                {
                     parmac.timer_start = 15;
-                    parmac.timer_stop = 0;
+                    parmac.timer_stop  = 0;
                 }
-                else {
+                else
+                {
                     parmac.timer_start = 15;
-                    parmac.timer_stop = 15;
+                    parmac.timer_stop  = 15;
                 }
 
-                saveParMac(parmac);
                 f_clear_pag = 1;
                 break;
 
@@ -164,7 +180,9 @@ static void keyboard_processor(char cKey)
 }
 
 PAGINATA pag_config_struct = {
-    .d_processor = display_processor, .k_processor = keyboard_processor, .tipo = DEF,
+    .d_processor = display_processor,
+    .k_processor = keyboard_processor,
+    .tipo        = DEF,
 };
 
 PAGINATA *PAG_CONFIG = &pag_config_struct;

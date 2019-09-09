@@ -29,8 +29,8 @@
 
 
 
-#define LED_RUN_TRIS            TRISBbits.TRISB8
-#define LED_RUN                 LATBbits.LATB8
+#define LED_RUN_TRIS            TRISAbits.TRISA8
+#define LED_RUN                 LATAbits.LATA8
 
 
 // TODO: READ_WRITE dovrebbe essere RB2
@@ -41,14 +41,14 @@
 
 //  KEYBOARD ================================================================ //
 //
-#define KEY_1                   !PORTBbits.RB1
-#define KEY_1_TRIS              TRISBbits.TRISB1
-#define KEY_2                   !PORTBbits.RB4
-#define KEY_2_TRIS              TRISBbits.TRISB4
-#define KEY_3                   !PORTCbits.RC6
-#define KEY_3_TRIS              TRISCbits.TRISC6
-#define KEY_4                   !PORTCbits.RC7
-#define KEY_4_TRIS              TRISCbits.TRISC7
+#define KEY_1                   !PORTCbits.RC2
+#define KEY_1_TRIS              TRISCbits.TRISC2
+#define KEY_2                   !PORTCbits.RC3
+#define KEY_2_TRIS              TRISCbits.TRISC3
+#define KEY_3                   !PORTBbits.RB10
+#define KEY_3_TRIS              TRISBbits.TRISB10
+#define KEY_4                   !PORTBbits.RB11
+#define KEY_4_TRIS              TRISBbits.TRISB11
 
 
 
@@ -67,33 +67,37 @@
 
 //  GENERIC OUTPUTS ========================================================= //
 //
-#define OUT_01                  LATCbits.LATC8
-#define OUT_01_TRIS             TRISCbits.TRISC8
-#define OUT_02                  LATBbits.LATB9
-#define OUT_02_TRIS             TRISBbits.TRISB9
-#define OUT_03                  LATCbits.LATC9
-#define OUT_03_TRIS             TRISCbits.TRISC9
+#define OUT_01                  LATCbits.LATC1
+#define OUT_01_TRIS             TRISCbits.TRISC1
+#define OUT_02                  LATAbits.LATA7
+#define OUT_02_TRIS             TRISAbits.TRISA7
+#define OUT_03                  LATBbits.LATB14
+#define OUT_03_TRIS             TRISBbits.TRISB14
 
 
 // LEDs
-#define OUT_04                  LATBbits.LATB0
-#define OUT_04_TRIS             TRISBbits.TRISB0
-#define OUT_05                  LATBbits.LATB2
-#define OUT_05_TRIS             TRISBbits.TRISB2
-#define OUT_06                  LATBbits.LATB3
-#define OUT_06_TRIS             TRISBbits.TRISB3
-#define OUT_07                  LATCbits.LATC0
-#define OUT_07_TRIS             TRISCbits.TRISC0
-#define OUT_08                  LATCbits.LATC1
-#define OUT_08_TRIS             TRISCbits.TRISC1
-#define OUT_09                  LATCbits.LATC2
-#define OUT_09_TRIS             TRISCbits.TRISC2
-#define OUT_10                  LATCbits.LATC3
-#define OUT_10_TRIS             TRISCbits.TRISC3
-#define OUT_11                  LATCbits.LATC5
-#define OUT_11_TRIS             TRISCbits.TRISC5
-#define OUT_12                  LATCbits.LATC4
-#define OUT_12_TRIS             TRISCbits.TRISC4
+#define OUT_04                  LATAbits.LATA0
+#define OUT_04_TRIS             TRISAbits.TRISA0
+#define OUT_05                  LATAbits.LATA1
+#define OUT_05_TRIS             TRISAbits.TRISA1
+#define OUT_06                  LATBbits.LATB0
+#define OUT_06_TRIS             TRISBbits.TRISB0
+#define OUT_07                  LATBbits.LATB1
+#define OUT_07_TRIS             TRISBbits.TRISB1
+#define OUT_08                  LATBbits.LATB2
+#define OUT_08_TRIS             TRISBbits.TRISB2
+#define OUT_09                  LATBbits.LATB3
+#define OUT_09_TRIS             TRISBbits.TRISB3
+#define OUT_10                  LATCbits.LATC0
+#define OUT_10_TRIS             TRISCbits.TRISC0
+#define OUT_11                  LATBbits.LATB12
+#define OUT_11_TRIS             TRISBbits.TRISB12
+#define OUT_12                  LATCbits.LATC9
+#define OUT_12_TRIS             TRISCbits.TRISC9
+#define OUT_13                  LATBbits.LATB13
+#define OUT_13_TRIS             TRISBbits.TRISB13
+#define OUT_14                  LATAbits.LATA10
+#define OUT_14_TRIS             TRISAbits.TRISA10
 
 
 #define TRIAC                   OUT_01
@@ -104,13 +108,13 @@
 
 //  I2C ===================================================================== //
 //
-#define I2C_CLK                 LATAbits.LATA1
-#define I2C_CLK_TRIS            TRISAbits.TRISA1
-#define I2C_DATA_OUT            LATAbits.LATA0      //PORTBbits.RB11    
-#define I2C_DATA_IN             PORTAbits.RA0
-#define I2C_DATA_TRIS           TRISAbits.TRISA0
-//#define WRITE_PROTECT           LATBbits.LATB7      //PORTBbits.RB7
-//#define WRITE_PROTECT_TRIS      TRISBbits.TRISB7
+#define I2C_CLK                 LATBbits.LATB8
+#define I2C_CLK_TRIS            TRISBbits.TRISB8
+#define I2C_DATA_OUT            LATBbits.LATB9      //PORTBbits.RB11    
+#define I2C_DATA_IN             PORTBbits.RB9
+#define I2C_DATA_TRIS           TRISBbits.TRISB9
+#define WRITE_PROTECT           LATAbits.LATA9      //PORTBbits.RB7
+#define WRITE_PROTECT_TRIS      TRISAbits.TRISA9
 
 
 #define I2C_MODULE              0

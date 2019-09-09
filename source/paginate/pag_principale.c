@@ -40,6 +40,9 @@ static void display_processor()
     int *                     rampa;
 
     rampa = rampa_velocita_50hz;
+    
+    set_digout(OUT_LEDP3);
+    set_digout(OUT_LEDP4);
 
     if (timer_start != 0)
     {
@@ -109,7 +112,8 @@ static void display_processor()
                 led++;
             }
         }
-        else {
+        else
+        {
             for (i = 0; i < MAX_RAMPA; i++)
             {
                 if (i <= parmac.vel_ventola)
@@ -124,7 +128,7 @@ static void display_processor()
                 led++;
             }
         }
-        
+
 
 
         f_1s        = 0;
@@ -151,15 +155,16 @@ static void display_processor()
 
 static void keyboard_processor(char cKey)
 {
-    int *rampa;
-    char f_passwordOk = 0;
-    const char password[4] = {P_PIU_MENO_GIU, P_PIU_MENO_SU, P_PIU_MENO_GIU, P_PIU_MENO_SU};
+    int *       rampa;
+    char        f_passwordOk        = 0;
+    const char  password[4]         = {P_PIU_MENO_GIU, P_PIU_MENO_SU, P_PIU_MENO_GIU, P_PIU_MENO_SU};
     static char passwordInserita[4] = {0};
-    static int index = 0;
-    int i;
+    static int  index               = 0;
+    int         i;
     rampa = rampa_velocita_50hz;
-    
-    if (cKey == 0x00) {
+
+    if (cKey == 0x00)
+    {
         index = 0;
     }
 
@@ -216,37 +221,41 @@ static void keyboard_processor(char cKey)
 
             case P_PIU: /* -------------------------------------------- */
 
-                if (timer_start == 0 && timer_stop == 0 && parmac.vel_ventola < MAX_RAMPA - 1) {
+                if (timer_start == 0 && timer_stop == 0 && parmac.vel_ventola < MAX_RAMPA - 1)
+                {
                     parmac.vel_ventola++;
-                /* Setta la velocita solo se non sono in attesa di un timer*/
+                    /* Setta la velocita solo se non sono in attesa di un timer*/
                     setVelocita(rampa[parmac.vel_ventola]);
-                    saveParMac(parmac);
                 }
-                    
+
                 f_clear_pag = 1;
                 break;
 
             case P_MENO: /* ------------------------------------------- */
-                if (timer_start == 0 && timer_stop == 0 && parmac.vel_ventola > 0) {
+                if (timer_start == 0 && timer_stop == 0 && parmac.vel_ventola > 0)
+                {
                     parmac.vel_ventola--;
-                /* Setta la velocita solo se non sono in attesa di un timer*/
+                    /* Setta la velocita solo se non sono in attesa di un timer*/
                     setVelocita(rampa[parmac.vel_ventola]);
-                    saveParMac(parmac);
                 }
 
                 f_clear_pag = 1;
                 break;
-                
+
             case P_PIU_MENO_SU:
             case P_PIU_MENO_GIU:
-                if (timer_start == 0 && timer_stop == 0) {
+                if (timer_start == 0 && timer_stop == 0)
+                {
                     passwordInserita[index++] = cKey;
 
-                    if (index == 4) {
-                        index = 0;
+                    if (index == 4)
+                    {
+                        index        = 0;
                         f_passwordOk = 1;
-                        for (i = 0; i < 4; i++) {
-                            if (passwordInserita[i] != password[i]) {
+                        for (i = 0; i < 4; i++)
+                        {
+                            if (passwordInserita[i] != password[i])
+                            {
                                 f_passwordOk = 0;
                                 break;
                             }
@@ -264,7 +273,9 @@ static void keyboard_processor(char cKey)
 }
 
 PAGINATA pag_principale_struct = {
-    .d_processor = display_processor, .k_processor = keyboard_processor, .tipo = DEF,
+    .d_processor = display_processor,
+    .k_processor = keyboard_processor,
+    .tipo        = DEF,
 };
 
 PAGINATA *PAG_PRINCIPALE = &pag_principale_struct;

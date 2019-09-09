@@ -15,6 +15,7 @@
 /*                                                                            */
 /******************************************************************************/
 
+#include <string.h>
 #include "variabili_parametri_macchina.h"
 #include "i2c_module2.h"
 
@@ -28,14 +29,9 @@ struct PARAMETRI_MACCHINA parmac = {
     // BASE =========================================================== //
     // -------------------------------------------------------------------------------------------------------------------------------
     // UM      RANGE       TEST 0  PM 1    PM 2    PM 3    PM 4    PM 5    PM 6    RID
-    .ver_pack_unpack_par_mac = 0,     // 000      ver.pack/unpack utilizzata per i PARAMETRI MACCHINA
-    //          da inserire in testa al pacchetto dati                              n.ro    0-255
-
-    .rampa         = 0,
-    .vel_ventola   = 0,
-    .potenziometro = 0,
-    .timer_start   = 15,
-    .timer_stop    = 15,
+    .vel_ventola = 0,
+    .timer_start = 15,
+    .timer_stop  = 15,
 };
 
 
@@ -47,11 +43,19 @@ int saveParMac(struct PARAMETRI_MACCHINA p)
 int loadParMac(struct PARAMETRI_MACCHINA *p)
 {
     int res = sequentialRead_24XX16(MEM_16_B0, 0x00, 0x01, (unsigned char *)p, sizeof(struct PARAMETRI_MACCHINA));
-    if (p->timer_start > 15) {
+    if (p->timer_start > 15)
+    {
         p->timer_start = 15;
     }
-    if (p->timer_stop > 15) {
+    if (p->timer_stop > 15)
+    {
         p->timer_stop = 15;
     }
     return res;
+}
+
+
+int parmacChanged(struct PARAMETRI_MACCHINA *oldparmac, struct PARAMETRI_MACCHINA *curparmac)
+{
+    return memcmp(oldparmac, curparmac, sizeof(struct PARAMETRI_MACCHINA));
 }
