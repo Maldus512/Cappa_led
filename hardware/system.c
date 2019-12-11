@@ -51,9 +51,9 @@
     CSECMD /* Clock Switching Mode bits (Clock switching is enabled,Fail-safe Clock Monitor is disabled) */
 
 /* FWDT */
-#pragma config WDTPS  = PS32768 /* Watchdog Timer Postscaler bits (1:32,768) */
-#pragma config FWPSA  = PR128   /* Watchdog Timer Prescaler bit (1:128) */
-#pragma config FWDTEN = OFF     /* Watchdog Timer Enable bits (WDT and SWDTEN disabled) */
+#pragma config WDTPS  = PS64 /* Watchdog Timer Postscaler bits (1:32,768) */
+#pragma config FWPSA  = PR32   /* Watchdog Timer Prescaler bit (1:128) */
+#pragma config FWDTEN = ON_SWDTEN     /* Watchdog Timer Enable bits (WDT and SWDTEN disabled) */
 #pragma config WINDIS = OFF     /* Watchdog Timer Window Enable bit (Watchdog Timer in Non-Window mode) */
 #pragma config WDTWIN = WIN25   /* Watchdog Timer Window Select bits (WDT Window is 25% of WDT period) */
 #pragma config WDTCMX =                                                                                                \

@@ -81,6 +81,7 @@ const unsigned char str_versione_prog[] = "[V:00.3 D:11/05/2018]\0";     // 21 C
 #include "digout.h"
 #include "EEPROM/24XX16.h"
 #include "dispfunz.h"
+#include "wdt.h"
 
 
 
@@ -170,6 +171,8 @@ int main(void)
     set_digout(led);
     while (1)
     {
+        refresh_stamp_int(MAIN);
+        
         if (pag_corrente != NULL && f_update)
         {
             tasto = KeyBoard();

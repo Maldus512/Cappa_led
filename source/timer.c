@@ -24,6 +24,7 @@
 #include "digout.h"
 #include "peripherals.h"
 #include "variabili_parametri_sistema.h"
+#include "wdt.h"
 
 unsigned int  timer_sonde[4]            = {0, 0, 0, 0};
 unsigned long timer_inibizione_sonde[4] = {0, 0, 0, 0};
@@ -120,14 +121,14 @@ void __attribute__((interrupt, auto_psv)) _T1Interrupt(void)
 {
     uint8_t    P1_BUF;
     static int counter_1s = 0;
+    
+    refresh_stamp_int(T1INT);
 
     if (n_set_out_run == 1)
         LED_RUN = ~LED_RUN;
 
     if (n_set_out_run == 2)     // ~12us
         LED_RUN = 1;
-
-
 
 
 
@@ -177,6 +178,8 @@ void __attribute__((interrupt, auto_psv)) _T2Interrupt(void)
 {
     static int counter_100ms = 0;
     static int counter_500ms = 0;
+    
+    refresh_stamp_int(T2INT);
 
     f_update = 1;
 
