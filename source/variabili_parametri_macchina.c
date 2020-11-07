@@ -51,6 +51,8 @@ int loadParMac(struct PARAMETRI_MACCHINA *p)
     {
         p->timer_stop = 15;
     }
+    if (p->vel_ventola < 0 || p->vel_ventola >= MAX_RAMPA)
+        p->vel_ventola = 0;
     return res;
 }
 
