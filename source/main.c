@@ -75,13 +75,13 @@ const unsigned char str_versione_prog[] = "[V:00.3 D:11/05/2018]\0";     // 21 C
 #include "digin.h"
 #include "peripherals.h"
 #include "keyb.h"
-#include "test_suite.h"
 #include "variabili_parametri_macchina.h"
 #include "i2c_driver.h"
 #include "digout.h"
 #include "EEPROM/24XX16.h"
 #include "dispfunz.h"
 #include "wdt.h"
+#include "gel/data_structures/watcher.h"
 
 
 
@@ -90,18 +90,18 @@ const unsigned char str_versione_prog[] = "[V:00.3 D:11/05/2018]\0";     // 21 C
 // ========================================================================== //
 int main(void)
 {
-    struct PARAMETRI_MACCHINA oldparmac;
-    unsigned long long        ts      = 0;
-    char                      blinker = 0, f_tosave = 0;
+    char                      blinker = 0;
     int                       i     = 0;
     unsigned char             test  = 0x00;
     unsigned char             tasto = 0;
+    
     OUTPUT                    led   = OUT_LED1P1;
     Configure_Oscillator();
     delay_ms(250);
 
     Init_GPIO();
     Init_I2C();
+    parmac_init();
 
     byteRead_24XX16(MEM_16_B0, 0x00, 0x00, &test);
 
@@ -135,13 +135,13 @@ int main(void)
         }
 
         saveParMac(parmac);
+        parmac_save_speed(parmac);
     }
-
-
+    
+    parmac_watchlist_init(&parmac);
     Init_Timers();
     Init_Digin_Filter(&DI_P1, 0, 0, DEBOUNCE);
     Init_ZeroCrossing();
-
 
 
     delay_ms(500);
@@ -167,7 +167,6 @@ int main(void)
     // MAIN LOOP ============================================================ //
     // MAIN LOOP ============================================================ //
     // MAIN LOOP ============================================================ //
-    memcpy(&oldparmac, &parmac, sizeof(struct PARAMETRI_MACCHINA));
     set_digout(led);
     while (1)
     {
@@ -181,20 +180,9 @@ int main(void)
             f_update = 0;
         }
 
-
-        // Se c'e' una modifica salvala dopo 5 secondi
-        if (parmacChanged(&oldparmac, &parmac))
-        {
-            memcpy(&oldparmac, &parmac, sizeof(struct PARAMETRI_MACCHINA));
-            ts       = getTimestamp();
-            f_tosave = 1;
-        }
-
-        if (f_tosave && getTimestamp() - ts > 5)
-        {
-            saveParMac(parmac);
-            f_tosave = 0;
-        }
+        parmac_process_changes(getTimestamp()*1000);
+        
+        Idle();
     }
     return 0;
 }

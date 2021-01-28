@@ -53,6 +53,9 @@ extern struct PARAMETRI_MACCHINA parmac;
 
 int saveParMac(struct PARAMETRI_MACCHINA p);
 int loadParMac(struct PARAMETRI_MACCHINA* p);
-int parmacChanged(struct PARAMETRI_MACCHINA *oldparmac, struct PARAMETRI_MACCHINA *curparmac);
+void parmac_process_changes(unsigned long timestamp);
+void parmac_init(void);
+void parmac_watchlist_init(struct PARAMETRI_MACCHINA *p);
+void parmac_save_speed(struct PARAMETRI_MACCHINA p);
 
 #endif	/* VARIABILI_PARAMETRI_MACCHINA_H */

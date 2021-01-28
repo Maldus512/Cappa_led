@@ -19,6 +19,10 @@
                 <sourceRootElem>test</sourceRootElem>
                 <sourceRootElem>source</sourceRootElem>
                 <sourceRootElem>include</sourceRootElem>
+                <sourceRootElem>components/generic_embedded_libs/gel/wearleveling</sourceRootElem>
+                <sourceRootElem>components/generic_embedded_libs/gel/data_structures</sourceRootElem>
+                <sourceRootElem>components/gel/gel/wearleveling</sourceRootElem>
+                <sourceRootElem>components/gel/gel/data_structures</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

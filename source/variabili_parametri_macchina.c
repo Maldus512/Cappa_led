@@ -18,6 +18,13 @@
 #include <string.h>
 #include "variabili_parametri_macchina.h"
 #include "i2c_module2.h"
+#include "gel/wearleveling/wearleveling.h"
+#include "gel/data_structures/watcher.h"
+#include "gel_conf.h"
+
+ static wear_leveled_memory_t memory;
+ static watcher_t watchlist[2] = {WATCHER_NULL};
+
 
 int rampa_velocita_50hz[MAX_RAMPA] = {45, 51, 57, 65, 100};
 
@@ -34,30 +41,75 @@ struct PARAMETRI_MACCHINA parmac = {
     .timer_stop  = 15,
 };
 
+static void speed_changed(void *new, void *data) {
+    (void)data;
+    unsigned char buffer = (unsigned char)(*(unsigned int*)new);
+    wl_write(&memory, &buffer);
+}
+
+
+static int eeprom_read_block(size_t block_num, uint8_t * buffer){
+    return sequentialRead_24XX16(MEM_16_B0, 0x01, block_num*WL_BLOCK_SIZE, buffer, WL_BLOCK_SIZE);
+}
+
+
+static int eeprom_write_block(size_t block_num, uint8_t * buffer){
+    return sequentialWrite_24XX16(MEM_16_B0, 0x01, block_num*WL_BLOCK_SIZE, buffer, WL_BLOCK_SIZE);
+}
+
+
+void parmac_init(void) {
+    wl_init(&memory, eeprom_write_block, eeprom_read_block, 16, 1);
+}
+
+
+void parmac_watchlist_init(struct PARAMETRI_MACCHINA *p) {
+    watchlist[0] = WATCHER_DELAYED(&p->vel_ventola, speed_changed, NULL, 5000);
+    watchlist[1] = WATCHER_NULL;
+    watcher_list_init(watchlist);
+}
+
+
+void parmac_process_changes(unsigned long timestamp) {
+    watcher_process_changes(watchlist, timestamp);
+}
+
+
+void parmac_save_speed(struct PARAMETRI_MACCHINA p) {
+    unsigned char buffer = (unsigned char)(p.vel_ventola);
+    wl_write(&memory, &buffer);
+}
+
 
 int saveParMac(struct PARAMETRI_MACCHINA p)
 {
-    return sequentialWrite_24XX16(MEM_16_B0, 0x00, 0x01, (unsigned char *)&p, sizeof(struct PARAMETRI_MACCHINA));
+    unsigned char buffer[2] = {p.timer_start, p.timer_stop};
+    return sequentialWrite_24XX16(MEM_16_B0, 0x00, 0x01, buffer, 2);
 }
 
 int loadParMac(struct PARAMETRI_MACCHINA *p)
 {
-    int res = sequentialRead_24XX16(MEM_16_B0, 0x00, 0x01, (unsigned char *)p, sizeof(struct PARAMETRI_MACCHINA));
-    if (p->timer_start > 15)
-    {
+    unsigned char buffer[2] = {15, 15};
+    
+    int res = sequentialRead_24XX16(MEM_16_B0, 0x00, 0x01, buffer, 2);
+    
+    p->timer_start = buffer[0];
+    p->timer_stop = buffer[1];
+    
+    if (p->timer_start > 15) {
         p->timer_start = 15;
     }
-    if (p->timer_stop > 15)
-    {
+    if (p->timer_stop > 15) {
         p->timer_stop = 15;
     }
+    
+    if (wl_read(&memory, buffer) > 0) {
+        p->vel_ventola = 0;
+    } else {
+        p->vel_ventola = buffer[0];
+    }
+    
     if (p->vel_ventola < 0 || p->vel_ventola >= MAX_RAMPA)
         p->vel_ventola = 0;
     return res;
-}
-
-
-int parmacChanged(struct PARAMETRI_MACCHINA *oldparmac, struct PARAMETRI_MACCHINA *curparmac)
-{
-    return memcmp(oldparmac, curparmac, sizeof(struct PARAMETRI_MACCHINA));
 }

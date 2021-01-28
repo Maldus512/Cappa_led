@@ -43,6 +43,7 @@
         <itemPath>include/peripherals.h</itemPath>
         <itemPath>include/dispfunz.h</itemPath>
         <itemPath>include/wdt.h</itemPath>
+        <itemPath>include/gel_conf.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
@@ -52,6 +53,20 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="gel" projectFiles="true">
+        <logicalFolder name="data_structures"
+                       displayName="data_structures"
+                       projectFiles="true">
+          <itemPath>components/gel/gel/data_structures/watcher.c</itemPath>
+          <itemPath>components/gel/gel/data_structures/watcher.h</itemPath>
+        </logicalFolder>
+        <logicalFolder name="wearleveling"
+                       displayName="wearleveling"
+                       projectFiles="true">
+          <itemPath>components/gel/gel/wearleveling/wearleveling.h</itemPath>
+          <itemPath>components/gel/gel/wearleveling/wearleveling.c</itemPath>
+        </logicalFolder>
+      </logicalFolder>
       <logicalFolder name="hardware" displayName="hardware" projectFiles="true">
         <itemPath>hardware/GPIO.c</itemPath>
         <itemPath>hardware/system.c</itemPath>
@@ -76,10 +91,6 @@
       </logicalFolder>
       <itemPath>source/keyb.c</itemPath>
     </logicalFolder>
-    <logicalFolder name="test" displayName="test" projectFiles="true">
-      <itemPath>test/test_suite.c</itemPath>
-      <itemPath>test/test_suite.h</itemPath>
-    </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
                    projectFiles="false">
@@ -94,6 +105,10 @@
     <Elem>test</Elem>
     <Elem>source</Elem>
     <Elem>include</Elem>
+    <Elem>components/generic_embedded_libs/gel/wearleveling</Elem>
+    <Elem>components/generic_embedded_libs/gel/data_structures</Elem>
+    <Elem>components/gel/gel/wearleveling</Elem>
+    <Elem>components/gel/gel/data_structures</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -151,7 +166,7 @@
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="extra-include-directories"
-                  value="include;hardware;Grlib128x64\inc;GRAPH;drivers\I2C;test"/>
+                  value="include;hardware;Grlib128x64\inc;GRAPH;drivers\I2C;test;components\gel"/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-align-arr" value="false"/>
