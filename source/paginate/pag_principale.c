@@ -66,7 +66,8 @@ static void display_processor()
     if (f_new_pag == 1)
     {
         f_pwm_on = 0;
-        // parmac.vel_ventola = 0;
+        //if (parmac.vel_ventola <= 0 || parmac.vel_ventola >= MAX_RAMPA)
+        //    parmac.vel_ventola = 1;
 
         f_new_pag = 0;
     }
@@ -104,8 +105,16 @@ static void display_processor()
 
 
         led = OUT_LED1;
-        if (timer != 0 && blink)
+        if (!f_pwm_on) {
+            for (i = 0; i < MAX_RAMPA; i++)
+            {
+                clear_digout(led);
+                led++;
+            }
+        } else if (timer != 0 && blink)
         {
+            set_digout(led);
+            led++;
             for (i = 0; i < MAX_RAMPA; i++)
             {
                 clear_digout(led);
@@ -114,7 +123,10 @@ static void display_processor()
         }
         else
         {
-            for (i = 0; i < MAX_RAMPA; i++)
+            set_digout(led);
+            led++;
+            
+            for (i = 1; i < MAX_RAMPA; i++)
             {
                 if (i <= parmac.vel_ventola)
                 {
@@ -208,15 +220,15 @@ static void keyboard_processor(char cKey)
                 break;
 
             case P_SX: /* --------------------------------------------- */
-                if (get_digout(OUT_RELE2))
-                {
-                    clear_digout(OUT_RELE2);
-                }
-                else
-                {
-                    set_digout(OUT_RELE2);
-                }
-                f_clear_pag = 1;
+//                if (get_digout(OUT_RELE2))
+//                {
+//                    clear_digout(OUT_RELE2);
+//                }
+//                else
+//                {
+//                    set_digout(OUT_RELE2);
+//                }
+//                f_clear_pag = 1;
                 break;
 
             case P_PIU: /* -------------------------------------------- */

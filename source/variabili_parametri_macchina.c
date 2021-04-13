@@ -26,7 +26,9 @@
  static watcher_t watchlist[2] = {WATCHER_NULL};
 
 
-int rampa_velocita_50hz[MAX_RAMPA] = {45, 51, 57, 65, 100};
+//int rampa_velocita_50hz[MAX_RAMPA] = {45, 51, 57, 65, 100}; // Velocita'
+int rampa_velocita_50hz[MAX_RAMPA] = {0, 20, 37, 52, 100};  // Temperatura
+
 
 /* -------------------------------------------------------------------------- */
 /*  parametri macchina                                                        */
