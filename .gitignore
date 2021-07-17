@@ -1,4 +1,5 @@
-
+.generated_files
+generated_files
 *.d
 *.pre
 *.p1

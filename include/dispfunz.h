@@ -41,6 +41,8 @@ extern PAGINATA *pag_corrente;
 
 extern PAGINATA *PAG_PRINCIPALE;
 extern PAGINATA *PAG_CONFIG;
+extern PAGINATA *PAG_CALIBRAZIONE;
+
 
 
 

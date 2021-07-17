@@ -96,9 +96,6 @@ static void display_processor()
 
 static void keyboard_processor(char cKey)
 {
-    int *rampa;
-    rampa = rampa_velocita_50hz;
-
     // gestione tasti senza repeat ========================================== //
     if (cKey != 0 && cKey != 0xFF && OneShot)
     {
@@ -107,12 +104,12 @@ static void keyboard_processor(char cKey)
 
             case P_DX: /* --------------------------------------------- */
                 saveParMac(parmac);
-                Indietro();
+                Cambio_Pag(PAG_CALIBRAZIONE);
                 break;
 
             case P_SX: /* --------------------------------------------- */
                 saveParMac(parmac);
-                Indietro();
+                Cambio_Pag(PAG_CALIBRAZIONE);
                 break;
 
             case P_PIU: /* -------------------------------------------- */

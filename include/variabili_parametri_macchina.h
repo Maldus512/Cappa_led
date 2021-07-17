@@ -18,16 +18,10 @@
 #ifndef VARIABILI_PARAMETRI_MACCHINA_H
 #define	VARIABILI_PARAMETRI_MACCHINA_H
 
+#include <stdlib.h>
 
-#define SIZE_PAR_MAC        5 // era 106
-
-
-extern int old_livello_accesso;
 
 #define MAX_RAMPA    5
-
-extern int rampa_velocita_50hz[MAX_RAMPA];
-
 
 typedef enum {
     MOTORE_CUSTOM,
@@ -42,8 +36,8 @@ typedef enum {
 
 struct PARAMETRI_MACCHINA
 {
-// -------------------------------------------------------------------------------------------------------------------------------  UM      RANGE       TEST 0  PM 1    PM 2    PM 3    PM 4    PM 5    PM 6    RID
-    int     vel_ventola;
+    unsigned int     vel_ventola;
+    unsigned int     velocita_accensione;
     unsigned int     timer_start;
     unsigned int     timer_stop;
 };
@@ -57,5 +51,6 @@ void parmac_process_changes(unsigned long timestamp);
 void parmac_init(void);
 void parmac_watchlist_init(struct PARAMETRI_MACCHINA *p);
 void parmac_save_speed(struct PARAMETRI_MACCHINA p);
+unsigned int parmac_get_speed(size_t level);
 
 #endif	/* VARIABILI_PARAMETRI_MACCHINA_H */
