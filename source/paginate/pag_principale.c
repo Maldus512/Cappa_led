@@ -37,9 +37,6 @@ static void display_processor()
     static char               blink       = 0;
     int                       i;
     OUTPUT                    led;
-    int *                     rampa;
-
-    rampa = rampa_velocita_50hz;
     
     set_digout(OUT_LEDP3);
     set_digout(OUT_LEDP4);
@@ -65,10 +62,7 @@ static void display_processor()
 
     if (f_new_pag == 1)
     {
-        f_pwm_on = 0;
-        //if (parmac.vel_ventola <= 0 || parmac.vel_ventola >= MAX_RAMPA)
-        //    parmac.vel_ventola = 1;
-
+        phasecut_disable();
         f_new_pag = 0;
     }
 
@@ -115,7 +109,7 @@ static void display_processor()
         {
             set_digout(led);
             led++;
-            for (i = 0; i < MAX_RAMPA; i++)
+            for (i = 1; i < MAX_RAMPA; i++)
             {
                 clear_digout(led);
                 led++;
@@ -150,7 +144,7 @@ static void display_processor()
     if (timer_start != 0 && getTimestamp() - timer_start >= parmac.timer_start)
     {
         set_digout(OUT_RELE1);
-        setVelocita(rampa[parmac.vel_ventola]);
+        setVelocita(parmac_get_speed(parmac.vel_ventola));
         timer_start = 0;
         f_pwm_on    = 1;
         f_clear_pag = 1;
@@ -167,13 +161,11 @@ static void display_processor()
 
 static void keyboard_processor(char cKey)
 {
-    int *       rampa;
     char        f_passwordOk        = 0;
     const char  password[4]         = {P_PIU_MENO_GIU, P_PIU_MENO_SU, P_PIU_MENO_GIU, P_PIU_MENO_SU};
     static char passwordInserita[4] = {0};
     static int  index               = 0;
     int         i;
-    rampa = rampa_velocita_50hz;
 
     if (cKey == 0x00)
     {
@@ -191,12 +183,12 @@ static void keyboard_processor(char cKey)
                     if (parmac.timer_stop == 0 && timer_stop == 0)
                     {
                         clear_digout(OUT_RELE1);
-                        f_pwm_on = 0;
+                        phasecut_disable();
                     }
                     else if (timer_stop == 0)
                     {
                         setVelocita(100);
-                        f_pwm_on = 1;
+                        phasecut_enable();
                         clear_digout(OUT_RELE1);
                         timer_stop = getTimestamp();
                     }
@@ -206,13 +198,13 @@ static void keyboard_processor(char cKey)
                     if (parmac.timer_start == 0 && timer_start == 0)
                     {
                         set_digout(OUT_RELE1);
-                        setVelocita(rampa[parmac.vel_ventola]);
-                        f_pwm_on = 1;
+                        setVelocita(parmac_get_speed(parmac.vel_ventola));
+                        phasecut_enable();
                     }
                     else if (timer_start == 0)
                     {
                         setVelocita(100);
-                        f_pwm_on    = 1;
+                        phasecut_enable();
                         timer_start = getTimestamp();
                     }
                 }
@@ -237,7 +229,7 @@ static void keyboard_processor(char cKey)
                 {
                     parmac.vel_ventola++;
                     /* Setta la velocita solo se non sono in attesa di un timer*/
-                    setVelocita(rampa[parmac.vel_ventola]);
+                    setVelocita(parmac_get_speed(parmac.vel_ventola));
                 }
 
                 f_clear_pag = 1;
@@ -248,7 +240,7 @@ static void keyboard_processor(char cKey)
                 {
                     parmac.vel_ventola--;
                     /* Setta la velocita solo se non sono in attesa di un timer*/
-                    setVelocita(rampa[parmac.vel_ventola]);
+                    setVelocita(parmac_get_speed(parmac.vel_ventola));
                 }
 
                 f_clear_pag = 1;
@@ -274,7 +266,7 @@ static void keyboard_processor(char cKey)
                         }
                     }
                     if (f_passwordOk && f_pwm_on == 0)
-                        Cambio_Pag(PAG_CONFIG);
+                        Cambio_Pag(PAG_CALIBRAZIONE);
                 }
                 break;
 

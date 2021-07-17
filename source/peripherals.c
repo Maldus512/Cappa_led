@@ -30,7 +30,25 @@ char f_pwm_on = 0;
 
 
 /*Velocita' da 0 a 100. Da 90 in su si considera 100*/
-void setVelocita(int velocita) { velocita_pwm = velocita; }
+void setVelocita(int velocita) { 
+    velocita_pwm = velocita;
+}
+
+
+void phasecut_enable(void) {
+    f_pwm_on = 1;
+}
+
+
+void phasecut_disable(void) {
+    f_pwm_on = 0;
+}
+
+
+void phasecut_toggle(void) {
+    f_pwm_on = !f_pwm_on;
+}
+
 
 
 void Init_ZeroCrossing(void)

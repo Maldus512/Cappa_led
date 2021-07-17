@@ -26,6 +26,9 @@ extern char f_pwm_on;
 extern unsigned char p_val_pwm;
 extern char f_timer_max_velocita;
 
+void phasecut_enable(void);
+void phasecut_disable(void);
+void phasecut_toggle(void);
 void setVelocita(int velocita);
 void Init_ZeroCrossing();
 
